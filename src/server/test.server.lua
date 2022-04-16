@@ -1,7 +1,11 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
 local Modules = script.Parent.Modules
+local Packages = ReplicatedStorage:WaitForChild("Packages")
+
 local GameManager = require(Modules.GameManager)
+local Janitor = require(Packages.Janitor)
 
 function separate_string(string: string, separator: string) --> Table
    local result: table = {}

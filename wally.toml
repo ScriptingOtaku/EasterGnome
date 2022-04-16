@@ -4,6 +4,9 @@ version = "0.1.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
+[place]
+shared-packages = "game.ReplicatedStorage.Packages"
+
 [dependencies]
 Promise = "evaera/promise@3.2.1"
 ProfileService = "brittonfischer/profileservice@2.1.5"
