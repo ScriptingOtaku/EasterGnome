@@ -5,6 +5,14 @@
     Responsible for handling the placement and any input on the game board.
 ]]
 
+--[[
+    On hover over player unit, give info
+    On click on player unit, select unit to do action
+        * Move
+        * Attack
+        * Collect resources
+]]
+
 local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local CollectionService = game:GetService("CollectionService")
