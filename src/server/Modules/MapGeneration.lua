@@ -54,7 +54,8 @@ type Map = { -- Map; the actual map
     tiles: table,
     wall_instances: table,
     tile_instances: table,
-    place_tiles: BindableEvent,
+    place_tiles: () -> Tile,
+    get_tile: (x: number, y: number) -> Tile,
 }
 type Map_Def = { -- Map Definition; used in function parameters
     width: number,
@@ -72,6 +73,25 @@ local Default_Map_Def: Map_Def = { -- Default Map Definition
     },
     seed = TERRAIN_SEED
 }
+
+function get_terrain_type(height: number) --> Terrain_Type
+    height = height * AMPLITUDE
+    if height > SEA_LEVEL then
+		if height > FOREST_LEVEL then
+			if height > MOUNTAIN_LEVEL then
+				--mountain
+				return Terrain_Type.Mountain
+			end
+			--forest
+			return Terrain_Type.Forest
+		end
+		--grass
+		return Terrain_Type.GrassLand
+	else
+		--sea
+		return Terrain_Type.Sea
+	end
+end
 
 function generate_noise(x: number, y: number, seed: number) --> Number
     local noiseHeight = math.noise(x / RESOLUTION * FREQUENCY, y / RESOLUTION * FREQUENCY, seed)
@@ -163,25 +183,6 @@ function set_map_defaults(map: Map) --> Map
     return map
 end
 
-function get_terrain_type(height: number) --> Terrain_Type
-    height = height * AMPLITUDE
-    if height > SEA_LEVEL then
-		if height > FOREST_LEVEL then
-			if height > MOUNTAIN_LEVEL then
-				--mountain
-				return Terrain_Type.Mountain
-			end
-			--forest
-			return Terrain_Type.Forest
-		end
-		--grass
-		return Terrain_Type.GrassLand
-	else
-		--sea
-		return Terrain_Type.Sea
-	end
-end
-
 function generation:create_map(map_def: Map_Def) --> Map
     local map: Map = map_def :: Map
     map = set_map_defaults(map)
@@ -189,15 +190,13 @@ function generation:create_map(map_def: Map_Def) --> Map
     local tileMap: table = generate_tiles(terrain_map)
 
     map.tiles = tileMap
-    map.place_tiles = Instance.new("BindableEvent")
-    map.place_tiles.Event:Connect(function(parent: Instance)
+    map.place_tiles = function(parent: Instance)
         local tile_instances: table = {}
         for _, tile in pairs(tileMap) do
             local tile_instance = Assets.Tile:Clone()
             CollectionService:AddTag(tile_instance, "Tile")
             tile_instance.Size = Vector3.new(TILE_SIZE, TILE_SIZE, TILE_SIZE)
             tile_instance.Position = Vector3.new(tile.x, tile.y, tile.z)
-            tile_instance.Color = get_terrain_type(tile.height)
             tile_instance.Anchored = true
             tile_instance.Parent = parent
 
@@ -205,7 +204,10 @@ function generation:create_map(map_def: Map_Def) --> Map
         end
         map.wall_instances = generate_walls(map, parent)
         map.tile_instances = tile_instances
-    end)
+    end
+    map.get_tile = function(x: number, y: number)
+        return map.tiles[x][y]
+    end
 
     return map
 end

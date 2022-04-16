@@ -18,7 +18,7 @@ map_folder.Parent = workspace
 function game_manager:start_game(_player: Player) 
     -- start single player game
     local map = MapGeneration:create_map()
-    map.place_tiles:Fire(map_folder)
+    map.place_tiles(map_folder)
 end
 
 return game_manager
