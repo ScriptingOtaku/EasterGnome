@@ -1,3 +1,10 @@
+--[[
+    @ScriptingOtaku
+
+    @PlacementHandler.lua
+    Responsible for handling the placement and any input on the game board.
+]]
+
 local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local CollectionService = game:GetService("CollectionService")
@@ -7,7 +14,6 @@ local placement_handler = {}
 
 local Player = Players.LocalPlayer
 
-local Connection = nil
 local Placement = nil
 local Placing = false
 local Targeted_Tile = nil
@@ -28,6 +34,24 @@ function Click(_name: string, state: Enum.UserInputState, _input: Enum.UserInput
     end
 end
 
+function Run()
+    if Placing then
+        local mouse = Player:GetMouse()
+
+        if mouse.Target then
+            if CollectionService:HasTag(mouse.Target, "Tile") then
+                Targeted_Tile = mouse.Target
+                Placement.Adornee = Targeted_Tile
+                CanPlace = true
+            else
+                UnAssign()
+            end
+        else
+            UnAssign()
+        end
+    end
+end
+
 function placement_handler:start()
     if Placing then
         return
@@ -40,28 +64,12 @@ function placement_handler:start()
     Placement.LineThickness = 0.1
     Placement.Parent = workspace
 
-    Connection = RunService.RenderStepped:Connect(function(_deltaTime: number)
-        if Placing then
-            local mouse = Player:GetMouse()
-
-            if mouse.Target then
-                if CollectionService:HasTag(mouse.Target, "Tile") then
-                    Targeted_Tile = mouse.Target
-                    Placement.Adornee = Targeted_Tile
-                    CanPlace = true
-                else
-                    UnAssign()
-                end
-            else
-                UnAssign()
-            end
-        end
-    end)
+    RunService:BindToRenderStep("Placement", Enum.RenderPriority.Camera.Value, Run)
 end
 
 function placement_handler:stop()
     Placing = false
-    Connection:Disconnect()
+    RunService:UnbindFromRenderStep("Placement")
     Placement:Destroy()
     ContextActionService:UnbindAction("Click")
 end
