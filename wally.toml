@@ -1,0 +1,11 @@
+[package]
+name = "djs08/eastergnome"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+Promise = "evaera/promise@3.2.1"
+ProfileService = "brittonfischer/profileservice@2.1.5"
+ReplicaService = "brittonfischer/replicaservice@0.1.0"
+Roact = "roblox/roact@1.4.2"
