@@ -10,11 +10,13 @@ local Modules = script.Parent
 local MapGeneration = require(Modules.MapGeneration)
 local MapDecoration = require(Modules.MapDecoration)
 local UnitGeneration = require(Modules.UnitGeneration)
+local UnitMovement = require(Modules.UnitMovement)
 
 local game_manager = {}
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 local GetMap = Remotes:WaitForChild("Function_GetMap")
+local MoveUnit = Remotes:WaitForChild("Function_MoveUnit")
 
 local map_folder = workspace:FindFirstChild("Map") or Instance.new("Folder")
 map_folder.Name = "Map"
@@ -36,6 +38,11 @@ end
 
 GetMap.OnServerInvoke = function(_player)
     return map or nil
+end
+
+MoveUnit.OnServerInvoke = function(_player, unit, position)
+    local success = UnitMovement:move_unit(unit, position)
+    return success
 end
 
 return game_manager

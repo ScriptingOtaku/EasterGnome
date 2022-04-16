@@ -207,9 +207,6 @@ function generation:create_map(map_def: Map_Def) --> Map
         map.wall_instances = generate_walls(map, parent)
         map.tile_instances = tile_instances
     end
-    map.get_tile = function(x: number, y: number)
-        return map.tiles[x][y]
-    end
 
     return map
 end

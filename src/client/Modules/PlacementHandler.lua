@@ -35,6 +35,7 @@ local placement_handler = {}
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 local GetMap = Remotes:WaitForChild("Function_GetMap")
+local MoveUnit = Remotes:WaitForChild("Function_MoveUnit")
 
 local Player = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
@@ -93,12 +94,15 @@ function show_unit_range(unit: table, position: Vector3) --> [Tile], [SelectionB
 end
 
 function hide_unit_range()
-    print(Selected_Unit_Range_Boxes)
     Selected_Unit_Box.Adornee = nil
     for _, box in pairs(Selected_Unit_Range_Boxes) do
         box:Destroy()
     end
     Selected_Unit_Range_Boxes = {}
+end
+
+function move_unit(unit: table, pos: Vector3)
+    MoveUnit:FireServer(unit, pos)
 end
 
 function show_unit_info(unit: Unit)
@@ -154,6 +158,16 @@ function Click(_name: string, state: Enum.UserInputState, _input: Enum.UserInput
                         end
                     end
                 else
+                    local pos = Selected_Tile.Position
+                    if tile_unit(pos) then
+                        if tile_unit(pos).Owner == "Enemy" then
+                            print("attack")
+                            move_unit(Selected_Unit, pos)
+                        end
+                    else
+                        print("move")
+                        move_unit(Selected_Unit, pos)
+                    end
                     hide_unit_range()
                     Selected_Unit = nil
                 end
