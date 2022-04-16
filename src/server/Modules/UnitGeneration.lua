@@ -5,4 +5,6 @@
     Takes a map, then generates units.
 ]]
 
-return {}
+local UnitGeneration = {}
+
+return UnitGeneration
