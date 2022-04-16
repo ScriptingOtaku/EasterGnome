@@ -33,11 +33,18 @@ local Assets = ReplicatedStorage:WaitForChild("Assets")
 type Terrain_Type = {
     TerrainType: table
 }
-local Terrain_Type = -- Terrain Type Enum
-{
+local Terrain_Type = { -- Terrain Type Enum
     Sea = 0,
     Forest = 1,
     Mountain = 2,
+    GrassLand = 3,
+}
+type Tile = {
+    x: number,
+    y: number,
+    z: number,
+    height: number,
+    TerrainType: Terrain_Type
 }
 type Map = { -- Map; the actual map
     width: number,
@@ -87,7 +94,7 @@ function generate_terrain(map: Map) --> Table
 	return terrain
 end
 
-function generate_tiles(terrain_map: table) --> Table
+function generate_tiles(terrain_map: table) --> Tile[]
     local tiles: table = {}
 
     for x in pairs(terrain_map) do
@@ -99,6 +106,7 @@ function generate_tiles(terrain_map: table) --> Table
                 y = 0,
                 z = (z - 1) * TILE_SIZE,
                 height = height,
+                TerrainType = get_terrain_type(height)
             }
             table.insert(tiles, tile)
         end
@@ -155,23 +163,22 @@ function set_map_defaults(map: Map) --> Map
     return map
 end
 
-function colour_tile(height: number) --> Color3
+function get_terrain_type(height: number) --> Terrain_Type
     height = height * AMPLITUDE
-    print(height)
     if height > SEA_LEVEL then
 		if height > FOREST_LEVEL then
 			if height > MOUNTAIN_LEVEL then
 				--mountain
-				return Color3.new(0.254901, 0.254901, 0.254901)
+				return Terrain_Type.Mountain
 			end
 			--forest
-			return Color3.new(0, 0.266666, 0.133333)
+			return Terrain_Type.Forest
 		end
 		--grass
-		return Color3.new(0.250980, 0.494117, 0.250980)
+		return Terrain_Type.GrassLand
 	else
 		--sea
-		return Color3.new(0.145098, 0.384313, 0.690196)
+		return Terrain_Type.Sea
 	end
 end
 
@@ -190,7 +197,7 @@ function generation:create_map(map_def: Map_Def) --> Map
             CollectionService:AddTag(tile_instance, "Tile")
             tile_instance.Size = Vector3.new(TILE_SIZE, TILE_SIZE, TILE_SIZE)
             tile_instance.Position = Vector3.new(tile.x, tile.y, tile.z)
-            tile_instance.Color = colour_tile(tile.height)
+            tile_instance.Color = get_terrain_type(tile.height)
             tile_instance.Anchored = true
             tile_instance.Parent = parent
 
