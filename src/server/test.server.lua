@@ -30,3 +30,7 @@ Players.PlayerAdded:Connect(function(player: Player)
         end
     end)
 end)
+
+task.wait(1)
+
+GameManager:start_game(nil)

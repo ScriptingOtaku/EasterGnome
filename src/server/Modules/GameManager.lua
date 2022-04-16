@@ -8,6 +8,7 @@
 
 local Modules = script.Parent
 local MapGeneration = require(Modules.MapGeneration)
+local MapDecoration = require(Modules.MapDecoration)
 
 local game_manager = {}
 
@@ -19,6 +20,7 @@ function game_manager:start_game(_player: Player)
     -- start single player game
     local map = MapGeneration:create_map()
     map.place_tiles(map_folder)
+    MapDecoration:place(map)
 end
 
 return game_manager
