@@ -34,6 +34,8 @@ function game_manager:start_game(_player: Player)
     UnitGeneration:add_to_generation(UnitGeneration.Units.Tank, 25)
     UnitGeneration:add_to_generation(UnitGeneration.Units.Ambulance, 25)
     UnitGeneration:generate(map)
+
+    UnitMovement.map = map
 end
 
 GetMap.OnServerInvoke = function(_player)

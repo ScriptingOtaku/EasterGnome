@@ -102,7 +102,8 @@ function hide_unit_range()
 end
 
 function move_unit(unit: table, pos: Vector3)
-    MoveUnit:FireServer(unit, pos)
+    MoveUnit:InvokeServer(unit, pos)
+    map = GetMap:InvokeServer()
 end
 
 function show_unit_info(unit: Unit)

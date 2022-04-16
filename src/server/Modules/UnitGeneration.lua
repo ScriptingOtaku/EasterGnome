@@ -19,7 +19,7 @@ type Unit = {
     UnitName: string,
     Owner: Player,
     Model: Instance,
-    Position: Vector2,
+    Position: Vector3,
 }type Terrain_Type = {
     TerrainType: table
 }
@@ -100,7 +100,7 @@ function create_states(_unit_type: string) --> Folder
     Energy.Parent = Folder
     local Range = Instance.new("NumberValue")
     Range.Name = "Range"
-    Range.Value = 4
+    Range.Value = 8
     Range.Parent = Folder
     return Folder
 end
@@ -126,6 +126,8 @@ function spawn_unit(tile_instance: Instance, owner: string) --> Unit
     local unit_model = Unit_Assets:FindFirstChild(unit_choice):Clone()
     unit_model.Parent = (owner == "Player" and player_folder) or enemy_folder
     unit_model:PivotTo(tile_instance:GetPivot() * CFrame.new(0, tile_instance.size.Y * 2, 0))
+    
+    unit.Position = tile_instance.Position
 
     colour_unit(unit_model, owner)
     create_states(unit_choice).Parent = unit_model
