@@ -71,7 +71,19 @@ local Unit_Assets = Assets:WaitForChild("Units")
 local UNIT_SPAWN_CHANCE = 10
 
 function get_random(table: table) --> Item
-    --TODO: FIX THIS
+    -- Returns a random item from a weighted table
+    local total = 0
+    for _, v in pairs(table) do
+        total = total + v
+    end
+    local rand = math.random(1, total)
+    for i, v in pairs(table) do
+        if rand <= v then
+            return i
+        end
+        rand = rand - v
+    end
+
     return "Soldier"
 end
 

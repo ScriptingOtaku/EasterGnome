@@ -2,8 +2,8 @@ TODO:
 
 Camera: Fit the camera to game board
 Simple Interface
-Player Units
-Enemy Units
+// Player Units
+// Enemy Units
 Unit Fights
 Good Terrain
 Resource Collection
