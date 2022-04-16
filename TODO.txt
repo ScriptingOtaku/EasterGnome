@@ -1,6 +1,6 @@
 TODO:
 
-Camera: Fit the camera to game board
+// Camera: Fit the camera to game board
 Simple Interface
 // Player Units
 // Enemy Units

@@ -7,7 +7,7 @@
 			<token name="AnimationWeightedBlendFix">0</token>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<token name="ClientAnimatorThrottling">0</token>
-			<string name="CollisionGroups">Default^0^-3\Plugin_StudioTweaks_BoundingBox^1^-2</string>
+			<string name="CollisionGroups">Default^0^-3\Plugin_StudioTweaks_BoundingBox^1^-2\Unit^2^-5</string>
 			<Ref name="CurrentCamera">RBXB581358581184E0E898B3A41A661D88E</Ref>
 			<double name="DistributedGameTime">0</double>
 			<bool name="ExplicitAutoJoints">true</bool>
@@ -80,27 +80,27 @@
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>13.5047388</X>
-					<Y>0.588273346</Y>
-					<Z>42.8825264</Z>
-					<R00>-0.779554725</R00>
-					<R01>-0.0138219427</R01>
-					<R02>0.626181781</R02>
-					<R10>-0</R10>
-					<R11>0.999756575</R11>
-					<R12>0.0220679957</R12>
-					<R20>-0.62633431</R20>
-					<R21>0.0172032099</R21>
-					<R22>-0.779364765</R22>
+					<X>-8.77144051</X>
+					<Y>2.13337278</Y>
+					<Z>49.4305267</Z>
+					<R00>-0.508325994</R00>
+					<R01>-0.21776019</R01>
+					<R02>0.833177865</R02>
+					<R10>-7.45057971e-09</R10>
+					<R11>0.967501163</R11>
+					<R12>0.252867043</R12>
+					<R20>-0.861164749</R20>
+					<R21>0.128538892</R21>
+					<R22>-0.491805911</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>11</X>
-					<Y>0.500000954</Y>
-					<Z>46</Z>
+					<X>-10.4377966</X>
+					<Y>1.62763858</Y>
+					<Z>50.4141388</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -23737,9 +23737,9 @@ return camera_handler]]></ProtectedString>
 ]]
 
 --[[
-    When mouse is over a tile with a player unit, show the unit's info
-    When mouse selected a tile with a player unit, highlight tiles where the unit can reach
-    When selected, create a path from the selected unit to where the mouse is
+    x - When mouse is over a tile with a player unit, show the unit's info
+    x - When mouse selected a tile with a player unit, highlight tiles where the unit can reach
+    
     When clicked on a tile, move the unit to that tile
     When clicked on a unit, attack the unit
     When clicked on a resource, collect the resource
@@ -23758,6 +23758,7 @@ local placement_handler = {}
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 local GetMap = Remotes:WaitForChild("Function_GetMap")
+local MoveUnit = Remotes:WaitForChild("Function_MoveUnit")
 
 local Player = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
@@ -23766,7 +23767,9 @@ local Mouse = Player:GetMouse()
 local Over_Tile = false
 local Selected_Tile = nil
 local Selected_Unit = nil
+local Selected_Unit_Range_Boxes = {}
 local map = nil
+local unit_info = nil
 
 local Selection_Box = Instance.new("SelectionBox")
 Selection_Box.Color3 = Color3.fromRGB(0, 0, 0)
@@ -23777,29 +23780,65 @@ Selected_Unit_Box.Color3 = Color3.fromRGB(0, 0, 0)
 Selected_Unit_Box.LineThickness = 0.1
 Selected_Unit_Box.Parent = workspace
 
-function tile_unit(position: Vector3) --> Unit
+function get_tile(x, z)
     for _, tile in pairs(map.tiles) do
-        if tile.x == position.X and tile.z == position.Z then
-            return tile.Unit or nil
+        if tile.x == x and tile.z == z then
+            return tile
         end
     end
-    return nil
 end
 
-function show_unit_range(unit: Unit)
+function tile_unit(position: Vector3) --> Unit
+    return get_tile(position.X, position.Z).Unit
+end
+
+function show_unit_range(unit: table, position: Vector3) --> [Tile], [SelectionBox]
     Selected_Unit_Box.Adornee = Selected_Tile
+    local range = unit.Model:FindFirstChild("Unit States").Range.Value
+    local tiles_in_range = {}
+    local tiles_in_range_boxes = {}
+    
+    for x = position.X - range, position.X + range do
+        for z = position.Z - range, position.Z + range do
+            local tile = get_tile(x, z)
+            if tile then
+                local box = Instance.new("SelectionBox")
+                box.SurfaceColor3 = Color3.fromRGB(70, 78, 186)
+                box.SurfaceTransparency = 0.5
+                box.Transparency = 1
+                box.Adornee = tile.Instance
+                box.Parent = workspace
+                table.insert(tiles_in_range, tile)
+                table.insert(tiles_in_range_boxes, box)
+            end
+        end
+    end
+    return tiles_in_range, tiles_in_range_boxes
 end
 
-function hide_unit_range(unit: Unit)
+function hide_unit_range()
     Selected_Unit_Box.Adornee = nil
+    for _, box in pairs(Selected_Unit_Range_Boxes) do
+        box:Destroy()
+    end
+    Selected_Unit_Range_Boxes = {}
+end
+
+function move_unit(unit: table, pos: Vector3)
+    MoveUnit:InvokeServer(unit, pos)
+    map = GetMap:InvokeServer()
 end
 
 function show_unit_info(unit: Unit)
-    print("Show unit info")
+    if unit_info ~= unit and unit.Owner == "Player" then
+        print("Show unit info")
+        unit_info = unit
+    end
 end
 
 function hide_unit_info()
     print("Hide unit info")
+    unit_info = nil
 end
 
 function Raycast()
@@ -23838,11 +23877,22 @@ function Click(_name: string, state: Enum.UserInputState, _input: Enum.UserInput
                     if tile_unit(pos) then
                         if tile_unit(pos).Owner == "Player" then
                             Selected_Unit = tile_unit(pos)
-                            show_unit_range(Selected_Unit)
+                            local _
+                            _, Selected_Unit_Range_Boxes = show_unit_range(Selected_Unit, pos)
                         end
                     end
                 else
-                    hide_unit_range(Selected_Unit)
+                    local pos = Selected_Tile.Position
+                    if tile_unit(pos) then
+                        if tile_unit(pos).Owner == "Enemy" then
+                            print("attack")
+                            move_unit(Selected_Unit, pos)
+                        end
+                    else
+                        print("move")
+                        move_unit(Selected_Unit, pos)
+                    end
+                    hide_unit_range()
                     Selected_Unit = nil
                 end
             end
@@ -24119,11 +24169,13 @@ local Modules = script.Parent
 local MapGeneration = require(Modules.MapGeneration)
 local MapDecoration = require(Modules.MapDecoration)
 local UnitGeneration = require(Modules.UnitGeneration)
+local UnitMovement = require(Modules.UnitMovement)
 
 local game_manager = {}
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 local GetMap = Remotes:WaitForChild("Function_GetMap")
+local MoveUnit = Remotes:WaitForChild("Function_MoveUnit")
 
 local map_folder = workspace:FindFirstChild("Map") or Instance.new("Folder")
 map_folder.Name = "Map"
@@ -24141,10 +24193,17 @@ function game_manager:start_game(_player: Player)
     UnitGeneration:add_to_generation(UnitGeneration.Units.Tank, 25)
     UnitGeneration:add_to_generation(UnitGeneration.Units.Ambulance, 25)
     UnitGeneration:generate(map)
+
+    UnitMovement.map = map
 end
 
 GetMap.OnServerInvoke = function(_player)
     return map or nil
+end
+
+MoveUnit.OnServerInvoke = function(_player, unit, position)
+    local success = UnitMovement:move_unit(unit, position)
+    return success
 end
 
 return game_manager]]></ProtectedString>
@@ -24361,14 +24420,12 @@ function generation:create_map(map_def: Map_Def) --> Map
             tile_instance.Position = Vector3.new(tile.x, tile.y, tile.z)
             tile_instance.Anchored = true
             tile_instance.Parent = parent
+            tile.Instance = tile_instance
 
             tile_instances[tile] = tile_instance
         end
         map.wall_instances = generate_walls(map, parent)
         map.tile_instances = tile_instances
-    end
-    map.get_tile = function(x: number, y: number)
-        return map.tiles[x][y]
     end
 
     return map
@@ -24407,7 +24464,7 @@ type Unit = {
     UnitName: string,
     Owner: Player,
     Model: Instance,
-    Position: Vector2,
+    Position: Vector3,
 }type Terrain_Type = {
     TerrainType: table
 }
@@ -24488,11 +24545,10 @@ function create_states(_unit_type: string) --> Folder
     Energy.Parent = Folder
     local Range = Instance.new("NumberValue")
     Range.Name = "Range"
-    Range.Value = 4
+    Range.Value = 8
     Range.Parent = Folder
     return Folder
 end
-
 
 function colour_unit(unit_model: Instance, owner: string) --> Void
     local unit_colour = Unit_Colours[owner]
@@ -24515,6 +24571,8 @@ function spawn_unit(tile_instance: Instance, owner: string) --> Unit
     local unit_model = Unit_Assets:FindFirstChild(unit_choice):Clone()
     unit_model.Parent = (owner == "Player" and player_folder) or enemy_folder
     unit_model:PivotTo(tile_instance:GetPivot() * CFrame.new(0, tile_instance.size.Y * 2, 0))
+    
+    unit.Position = tile_instance.Position
 
     colour_unit(unit_model, owner)
     create_states(unit_choice).Parent = unit_model
@@ -24646,6 +24704,9 @@ function map_decoration:place(map: Map)
             end
         elseif terrain_type == Terrain_Type.GrassLand then
             tile_instance.BrickColor = BrickColor.new("Sea green")
+            if math.random(1, 100) <= FOREST_CHANCE then
+                decoration = Assets:FindFirstChild("Shed"):Clone()
+            end
         end
         if decoration then
             decoration:PivotTo(tile_instance:GetPivot() * CFrame.Angles(
@@ -24662,6 +24723,81 @@ return map_decoration]]></ProtectedString>
 					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d022499d6</UniqueId>
 				</Properties>
 			</Item>
+			<Item class="ModuleScript" referent="RBX48884DA3CCD94056A8785894B28A6638">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">UnitMovement</string>
+					<string name="ScriptGuid">{6ECE4961-1B58-4192-B92C-037893B7AA34}</string>
+					<ProtectedString name="Source"><![CDATA[
+local unit_movement = {}
+
+unit_movement.map = nil
+
+function get_tile(x, z)
+    for _, tile in pairs(unit_movement.map.tiles) do
+        if tile.x == x and tile.z == z then
+            return tile
+        end
+    end
+end
+
+function check_range(unit: table, position: Vector3)
+    local range = unit.Model:FindFirstChild("Unit States").Range.Value
+    
+    for x = position.X - range, position.X + range do
+        for z = position.Z - range, position.Z + range do
+            if x == position.X and z == position.Z then
+                local new_tile = get_tile(x, z)
+                local old_pos = unit.Position
+                local old_tile = get_tile(old_pos.X, old_pos.Z)
+                if new_tile.Unit then
+                    if new_tile.Unit.Owner == "Enemy" then
+                        print("Attack")
+                        local destroy = new_tile.Unit.Model
+                        new_tile.Unit = unit
+                        return true, destroy
+                    elseif new_tile.Unit.Owner == "Player" then
+                        -- unit can't attack own units
+                        print("Can't attack own units")
+                        return false
+                    end
+                else
+                    print("Move")
+                    old_tile.Unit = nil
+                    new_tile.Unit = unit
+                    return true
+                end
+            end
+        end
+    end
+    return false
+end
+
+function unit_movement:move_unit(unit: table, position: Vector3)
+    local success, destroy = check_range(unit, position)
+
+    if success then
+        local model = unit.Model
+        local humanoid = model:FindFirstChild("Humanoid")
+        unit.Position = position
+        humanoid:MoveTo(position)
+        humanoid.MoveToFinished:Connect(function()
+            if destroy then
+                destroy:Destroy()
+            end
+        end)
+    end
+
+    return success
+end
+
+return unit_movement]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d058be8e6</UniqueId>
+				</Properties>
+			</Item>
 		</Item>
 		<Item class="Script" referent="RBX91C633715FAC4FEA95A5D9B8BEF09629">
 			<Properties>
@@ -24670,35 +24806,9 @@ return map_decoration]]></ProtectedString>
 				<Content name="LinkedSource"><null></null></Content>
 				<string name="Name">test</string>
 				<string name="ScriptGuid">{50FFB28C-CACF-4926-AA20-9B096D18B4FF}</string>
-				<ProtectedString name="Source"><![CDATA[local Players = game:GetService("Players")
-
-local Modules = script.Parent.Modules
+				<ProtectedString name="Source"><![CDATA[local Modules = script.Parent.Modules
 
 local GameManager = require(Modules.GameManager)
-
-function separate_string(string: string, separator: string) --> Table
-   local result: table = {}
-   
-   if separator == nil then
-      separator = "%s"
-   end
-   for match in string.gmatch(string, "([^" .. separator .. "]+)") do
-      table.insert(result, match)
-   end
-    return result
-end
-
-Players.PlayerAdded:Connect(function(player: Player)
-    player.Chatted:Connect(function(message: string)
-        local sep: table = separate_string(message, " ")
-        local command: string = sep[1]
-        local _args: table = table.remove(sep, 1)
-
-        if command == "!start" then
-            GameManager:start_game(player)
-        end
-    end)
-end)
 
 task.wait(1)
 
@@ -64208,7 +64318,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4288914085</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -64375,7 +64485,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -64680,7 +64790,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -64775,7 +64885,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -64870,7 +64980,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4294506744</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -64965,7 +65075,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4294506744</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -65060,7 +65170,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4294506744</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -65300,7 +65410,7 @@ end]]></ProtectedString>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
-								<int name="CollisionGroupId">0</int>
+								<int name="CollisionGroupId">2</int>
 								<Color3uint8 name="Color3uint8">4294924633</Color3uint8>
 								<PhysicalProperties name="CustomPhysicalProperties">
 									<CustomPhysics>false</CustomPhysics>
@@ -65522,7 +65632,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4288914085</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -65689,7 +65799,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -65994,7 +66104,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -66089,7 +66199,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -66184,7 +66294,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4278255360</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -66279,7 +66389,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4278255360</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -66374,7 +66484,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4278255360</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -66614,7 +66724,7 @@ end]]></ProtectedString>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
-								<int name="CollisionGroupId">0</int>
+								<int name="CollisionGroupId">2</int>
 								<Color3uint8 name="Color3uint8">4294924633</Color3uint8>
 								<PhysicalProperties name="CustomPhysicalProperties">
 									<CustomPhysics>false</CustomPhysics>
@@ -66836,7 +66946,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4288914085</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -67003,7 +67113,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -67308,7 +67418,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -67403,7 +67513,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4280763949</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -67498,7 +67608,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4292511041</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -67593,7 +67703,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4292511041</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -67688,7 +67798,7 @@ end]]></ProtectedString>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
-							<int name="CollisionGroupId">0</int>
+							<int name="CollisionGroupId">2</int>
 							<Color3uint8 name="Color3uint8">4292511041</Color3uint8>
 							<PhysicalProperties name="CustomPhysicalProperties">
 								<CustomPhysics>false</CustomPhysics>
@@ -67928,7 +68038,7 @@ end]]></ProtectedString>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
-								<int name="CollisionGroupId">0</int>
+								<int name="CollisionGroupId">2</int>
 								<Color3uint8 name="Color3uint8">4294924633</Color3uint8>
 								<PhysicalProperties name="CustomPhysicalProperties">
 									<CustomPhysics>false</CustomPhysics>
@@ -68090,6 +68200,15 @@ end]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d0450dad0</UniqueId>
+				</Properties>
+			</Item>
+			<Item class="RemoteFunction" referent="RBX91AB99B007DB4DA292743076EB332D8A">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<string name="Name">Function_MoveUnit</string>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d058be8e8</UniqueId>
 				</Properties>
 			</Item>
 		</Item>
