@@ -1,4 +1,18 @@
-local RunService = game:GetService("RunService")
+--[[
+    @ScriptingOtaku
+
+    @MapGeneration
+    Responsible for generating the map.
+]]
+
+--[[ TODO: 
+ * Add Terrain (e.g. mountains, hills, plains, desert, tundra, etc.)
+    * Add Resources (e.g. ores, herbs, metals, etc.)
+    * Add Features (e.g. rivers, lakes, roads, etc.)
+    * Add Cities (e.g. small, medium, large, etc.)
+]]
+
+local CollectionService = game:GetService("CollectionService")
 
 local generation = {}
 
@@ -87,7 +101,6 @@ function generate_tiles(terrain_map: table) --> Table
             }
             table.insert(tiles, tile)
         end
-        RunService.Heartbeat:Wait()
     end
     return tiles
 end
@@ -153,6 +166,7 @@ function generation:create_map(map_def: Map_Def) --> Map
         local tile_instances: table = {}
         for _, tile in pairs(tileMap) do
             local tile_instance = Instance.new("Part") --TODO: Change to model or something
+            CollectionService:AddTag(tile_instance, "Tile")
             tile_instance.Size = Vector3.new(TILE_SIZE, TILE_SIZE, TILE_SIZE)
             tile_instance.Position = Vector3.new(tile.x, tile.y, tile.z)
             tile_instance.Anchored = true
