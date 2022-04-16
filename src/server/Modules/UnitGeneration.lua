@@ -59,6 +59,8 @@ function unit_generation:generate(map: Map) --> [Unit]
     local tiles: Tile = map.tiles
     local tile_instances: Instance = map.tile_instances
 
+    for 
+
     return units_added
 end
 
