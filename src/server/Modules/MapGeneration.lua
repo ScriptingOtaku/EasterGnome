@@ -200,6 +200,7 @@ function generation:create_map(map_def: Map_Def) --> Map
             tile_instance.Position = Vector3.new(tile.x, tile.y, tile.z)
             tile_instance.Anchored = true
             tile_instance.Parent = parent
+            tile.Instance = tile_instance
 
             tile_instances[tile] = tile_instance
         end

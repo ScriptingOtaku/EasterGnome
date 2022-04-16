@@ -87,9 +87,27 @@ function get_random(table: table) --> Item
     return "Soldier"
 end
 
+function create_states(_unit_type: string) --> Folder
+    local Folder = Instance.new("Folder")
+    Folder.Name = "Unit States"
+    local Health = Instance.new("NumberValue")
+    Health.Name = "Health"
+    Health.Value = 100
+    Health.Parent = Folder
+    local Energy = Instance.new("NumberValue")
+    Energy.Name = "Energy"
+    Energy.Value = 100
+    Energy.Parent = Folder
+    local Range = Instance.new("NumberValue")
+    Range.Name = "Range"
+    Range.Value = 4
+    Range.Parent = Folder
+    return Folder
+end
+
 function colour_unit(unit_model: Instance, owner: string) --> Void
     local unit_colour = Unit_Colours[owner]
-    local config = unit_model:FindFirstChildOfClass("Configuration")
+    local config = unit_model:FindFirstChild("Colours")
     if config then
         for _, value in pairs(config:GetChildren()) do
             if value.Value then
@@ -110,6 +128,7 @@ function spawn_unit(tile_instance: Instance, owner: string) --> Unit
     unit_model:PivotTo(tile_instance:GetPivot() * CFrame.new(0, tile_instance.size.Y * 2, 0))
 
     colour_unit(unit_model, owner)
+    create_states(unit_choice).Parent = unit_model
 
     CollectionService:AddTag(unit_model, owner)
     unit.Model = unit_model

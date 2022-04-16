@@ -1,8 +1,6 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
 local Modules = script.Parent.Modules
-local Packages = ReplicatedStorage:WaitForChild("Packages")
 
 local GameManager = require(Modules.GameManager)
 

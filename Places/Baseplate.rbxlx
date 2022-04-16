@@ -80,18 +80,18 @@
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>7.50734758</X>
-					<Y>-1.43512833</Y>
-					<Z>46.2383575</Z>
-					<R00>0.0680870563</R00>
-					<R01>-0.482657254</R01>
-					<R02>-0.873158753</R02>
-					<R10>-1.86264515e-09</R10>
-					<R11>0.875189722</R11>
-					<R12>-0.483779907</R12>
-					<R20>0.997679412</R20>
-					<R21>0.0329391509</R21>
-					<R22>0.059589088</R22>
+					<X>13.5047388</X>
+					<Y>0.588273346</Y>
+					<Z>42.8825264</Z>
+					<R00>-0.779554725</R00>
+					<R01>-0.0138219427</R01>
+					<R02>0.626181781</R02>
+					<R10>-0</R10>
+					<R11>0.999756575</R11>
+					<R12>0.0220679957</R12>
+					<R20>-0.62633431</R20>
+					<R21>0.0172032099</R21>
+					<R22>-0.779364765</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -23426,101 +23426,6 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="Part" referent="RBXAD069626FC264B259F6768EDA4E8086E">
-			<Properties>
-				<bool name="Anchored">false</bool>
-				<BinaryString name="AttributesSerialize"></BinaryString>
-				<float name="BackParamA">-0.5</float>
-				<float name="BackParamB">0.5</float>
-				<token name="BackSurface">0</token>
-				<token name="BackSurfaceInput">0</token>
-				<float name="BottomParamA">-0.5</float>
-				<float name="BottomParamB">0.5</float>
-				<token name="BottomSurface">0</token>
-				<token name="BottomSurfaceInput">0</token>
-				<CoordinateFrame name="CFrame">
-					<X>11</X>
-					<Y>0.499994278</Y>
-					<Z>46.0000038</Z>
-					<R00>1</R00>
-					<R01>0</R01>
-					<R02>0</R02>
-					<R10>0</R10>
-					<R11>0.258818954</R11>
-					<R12>0.965925694</R12>
-					<R20>0</R20>
-					<R21>-0.965925694</R21>
-					<R22>0.258818954</R22>
-				</CoordinateFrame>
-				<bool name="CanCollide">true</bool>
-				<bool name="CanQuery">true</bool>
-				<bool name="CanTouch">true</bool>
-				<bool name="CastShadow">true</bool>
-				<int name="CollisionGroupId">0</int>
-				<Color3uint8 name="Color3uint8">4278255360</Color3uint8>
-				<PhysicalProperties name="CustomPhysicalProperties">
-					<CustomPhysics>false</CustomPhysics>
-				</PhysicalProperties>
-				<float name="FrontParamA">-0.5</float>
-				<float name="FrontParamB">0.5</float>
-				<token name="FrontSurface">0</token>
-				<token name="FrontSurfaceInput">0</token>
-				<float name="LeftParamA">-0.5</float>
-				<float name="LeftParamB">0.5</float>
-				<token name="LeftSurface">0</token>
-				<token name="LeftSurfaceInput">0</token>
-				<bool name="Locked">false</bool>
-				<bool name="Massless">false</bool>
-				<token name="Material">272</token>
-				<string name="MaterialVariantSerialized"></string>
-				<string name="Name">Part</string>
-				<CoordinateFrame name="PivotOffset">
-					<X>0</X>
-					<Y>0</Y>
-					<Z>0</Z>
-					<R00>1</R00>
-					<R01>0</R01>
-					<R02>0</R02>
-					<R10>0</R10>
-					<R11>1</R11>
-					<R12>0</R12>
-					<R20>0</R20>
-					<R21>0</R21>
-					<R22>1</R22>
-				</CoordinateFrame>
-				<float name="Reflectance">0</float>
-				<float name="RightParamA">-0.5</float>
-				<float name="RightParamB">0.5</float>
-				<token name="RightSurface">0</token>
-				<token name="RightSurfaceInput">0</token>
-				<int name="RootPriority">0</int>
-				<Vector3 name="RotVelocity">
-					<X>0</X>
-					<Y>0</Y>
-					<Z>0</Z>
-				</Vector3>
-				<int64 name="SourceAssetId">-1</int64>
-				<BinaryString name="Tags"></BinaryString>
-				<float name="TopParamA">-0.5</float>
-				<float name="TopParamB">0.5</float>
-				<token name="TopSurface">0</token>
-				<token name="TopSurfaceInput">0</token>
-				<float name="Transparency">0</float>
-				<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d03e54b59</UniqueId>
-				<Vector3 name="Velocity">
-					<X>0</X>
-					<Y>0</Y>
-					<Z>0</Z>
-				</Vector3>
-				<token name="formFactorRaw">1</token>
-				<token name="shape">1</token>
-				<Vector3 name="size">
-					<X>4</X>
-					<Y>1</Y>
-					<Z>2</Z>
-				</Vector3>
-			</Properties>
-		</Item>
 	</Item>
 	<Item class="SoundService" referent="RBX17ABE5E2660E49A2A9128923B0333831">
 		<Properties>
@@ -23772,8 +23677,8 @@ function camera_handler:start(size: Vector2, tile_size: number, rotation: Vector
 
     local position = Vector3.new(
         (size.X * tile_size / 2 - 2),
-        50,
-        (size.Y * tile_size / 2 - 2) - (rotation.X / 2)
+        30,
+        (size.Y * tile_size / 2 - 2) - (rotation.X / 3)
     )
     Camera.CFrame = CFrame.new(position) * CFrame.Angles(math.rad(rotation.X), math.rad(rotation.Y), math.rad(rotation.Z))
     
@@ -23831,73 +23736,127 @@ return camera_handler]]></ProtectedString>
         * Collect resources
 ]]
 
+--[[
+    When mouse is over a tile with a player unit, show the unit's info
+    When mouse selected a tile with a player unit, highlight tiles where the unit can reach
+    When selected, create a path from the selected unit to where the mouse is
+    When clicked on a tile, move the unit to that tile
+    When clicked on a unit, attack the unit
+    When clicked on a resource, collect the resource
+]]
+
 local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local CollectionService = game:GetService("CollectionService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
+
+local Packages = ReplicatedStorage:WaitForChild("Packages")
+local Roact = require(Packages:WaitForChild("Roact"))
 
 local placement_handler = {}
 
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local GetMap = Remotes:WaitForChild("Function_GetMap")
+
 local Player = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+local Mouse = Player:GetMouse()
 
-local Placement = nil
-local Placing = false
-local Targeted_Tile = nil
-local CanPlace = false
+local Over_Tile = false
+local Selected_Tile = nil
+local Selected_Unit = nil
+local map = nil
 
-function UnAssign()
-    Targeted_Tile = nil
-    Placement.Adornee = nil
-    CanPlace = false
+local Selection_Box = Instance.new("SelectionBox")
+Selection_Box.Color3 = Color3.fromRGB(0, 0, 0)
+Selection_Box.LineThickness = 0.1
+Selection_Box.Parent = workspace
+local Selected_Unit_Box = Instance.new("SelectionBox")
+Selected_Unit_Box.Color3 = Color3.fromRGB(0, 0, 0)
+Selected_Unit_Box.LineThickness = 0.1
+Selected_Unit_Box.Parent = workspace
+
+function tile_unit(position: Vector3) --> Unit
+    for _, tile in pairs(map.tiles) do
+        if tile.x == position.X and tile.z == position.Z then
+            return tile.Unit or nil
+        end
+    end
+    return nil
+end
+
+function show_unit_range(unit: Unit)
+    Selected_Unit_Box.Adornee = Selected_Tile
+end
+
+function hide_unit_range(unit: Unit)
+    Selected_Unit_Box.Adornee = nil
+end
+
+function show_unit_info(unit: Unit)
+    print("Show unit info")
+end
+
+function hide_unit_info()
+    print("Hide unit info")
+end
+
+function Raycast()
+    -- Raycast to the mouse
+    local raycast_parameters = RaycastParams.new()
+    raycast_parameters.FilterDescendantsInstances = { workspace.Map }
+    raycast_parameters.FilterType = Enum.RaycastFilterType.Whitelist
+    local unit_ray = Camera:ScreenPointToRay(Mouse.X, Mouse.Y)
+    local raycast_result = workspace:Raycast(unit_ray.Origin, unit_ray.Direction * 500, raycast_parameters)
+    if raycast_result then
+        if CollectionService:HasTag(raycast_result.Instance, "Tile") then
+            Over_Tile = true
+            Selected_Tile = raycast_result.Instance
+            Selection_Box.Adornee = Selected_Tile
+            if tile_unit(Selected_Tile.Position) then
+                show_unit_info(tile_unit(Selected_Tile.Position))
+            end
+        else
+            Over_Tile = false
+            Selected_Tile = nil
+        end
+    else
+        hide_unit_info()
+        Over_Tile = false
+        Selected_Tile = nil
+    end
 end
 
 function Click(_name: string, state: Enum.UserInputState, _input: Enum.UserInputType)
-    if CanPlace then
-        if state == Enum.UserInputState.Begin then
-            -- Open the menu
-            print("Clicked")
-        end
-    end
-end
-
-function Run()
-    if Placing then
-        local mouse = Player:GetMouse()
-
-        if mouse.Target then
-            if CollectionService:HasTag(mouse.Target, "Tile") then
-                Targeted_Tile = mouse.Target
-                Placement.Adornee = Targeted_Tile
-                CanPlace = true
-            else
-                UnAssign()
+    if state == Enum.UserInputState.Begin then
+        if Over_Tile then
+            if Selected_Tile then
+                -- Move
+                if Selected_Unit == nil then
+                    local pos = Selected_Tile.Position
+                    if tile_unit(pos) then
+                        if tile_unit(pos).Owner == "Player" then
+                            Selected_Unit = tile_unit(pos)
+                            show_unit_range(Selected_Unit)
+                        end
+                    end
+                else
+                    hide_unit_range(Selected_Unit)
+                    Selected_Unit = nil
+                end
             end
-        else
-            UnAssign()
         end
-    end
+    end 
 end
 
 function placement_handler:start()
-    if Placing then
-        return
-    end
+    map = GetMap:InvokeServer()
+    RunService:BindToRenderStep("Raycast", Enum.RenderPriority.Camera.Value, Raycast)
     ContextActionService:BindAction("Click", Click, false, Enum.UserInputType.MouseButton1)
-    Placing = true
-
-    Placement = Instance.new("SelectionBox")
-    Placement.Color3 = Color3.new(0, 0, 0)
-    Placement.LineThickness = 0.1
-    Placement.Parent = workspace
-
-    RunService:BindToRenderStep("Placement", Enum.RenderPriority.Camera.Value, Run)
 end
 
 function placement_handler:stop()
-    Placing = false
-    RunService:UnbindFromRenderStep("Placement")
-    Placement:Destroy()
-    ContextActionService:UnbindAction("Click")
 end
 
 return placement_handler]]></ProtectedString>
@@ -24148,13 +24107,13 @@ CameraHandler:start(
 					<Content name="LinkedSource"><null></null></Content>
 					<string name="Name">GameManager</string>
 					<string name="ScriptGuid">{8CF5096C-7B02-44B4-8F38-11B136AB5559}</string>
-					<ProtectedString name="Source"><![CDATA[--[[
+					<ProtectedString name="Source"><![CDATA[local ReplicatedStorage = game:GetService("ReplicatedStorage")
+--[[
     @ScriptingOtaku
 
     @GameManager
     Responsible for managing the game.
 ]]
-
 
 local Modules = script.Parent
 local MapGeneration = require(Modules.MapGeneration)
@@ -24163,13 +24122,18 @@ local UnitGeneration = require(Modules.UnitGeneration)
 
 local game_manager = {}
 
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local GetMap = Remotes:WaitForChild("Function_GetMap")
+
 local map_folder = workspace:FindFirstChild("Map") or Instance.new("Folder")
 map_folder.Name = "Map"
 map_folder.Parent = workspace
 
+local map = nil
+
 function game_manager:start_game(_player: Player) 
     -- start single player game
-    local map = MapGeneration:create_map()
+    map = MapGeneration:create_map()
     map.place_tiles(map_folder)
     MapDecoration:place(map)
 
@@ -24177,6 +24141,10 @@ function game_manager:start_game(_player: Player)
     UnitGeneration:add_to_generation(UnitGeneration.Units.Tank, 25)
     UnitGeneration:add_to_generation(UnitGeneration.Units.Ambulance, 25)
     UnitGeneration:generate(map)
+end
+
+GetMap.OnServerInvoke = function(_player)
+    return map or nil
 end
 
 return game_manager]]></ProtectedString>
@@ -24507,9 +24475,28 @@ function get_random(table: table) --> Item
     return "Soldier"
 end
 
+function create_states(_unit_type: string) --> Folder
+    local Folder = Instance.new("Folder")
+    Folder.Name = "Unit States"
+    local Health = Instance.new("NumberValue")
+    Health.Name = "Health"
+    Health.Value = 100
+    Health.Parent = Folder
+    local Energy = Instance.new("NumberValue")
+    Energy.Name = "Energy"
+    Energy.Value = 100
+    Energy.Parent = Folder
+    local Range = Instance.new("NumberValue")
+    Range.Name = "Range"
+    Range.Value = 4
+    Range.Parent = Folder
+    return Folder
+end
+
+
 function colour_unit(unit_model: Instance, owner: string) --> Void
     local unit_colour = Unit_Colours[owner]
-    local config = unit_model:FindFirstChildOfClass("Configuration")
+    local config = unit_model:FindFirstChild("Colours")
     if config then
         for _, value in pairs(config:GetChildren()) do
             if value.Value then
@@ -24530,6 +24517,7 @@ function spawn_unit(tile_instance: Instance, owner: string) --> Unit
     unit_model:PivotTo(tile_instance:GetPivot() * CFrame.new(0, tile_instance.size.Y * 2, 0))
 
     colour_unit(unit_model, owner)
+    create_states(unit_choice).Parent = unit_model
 
     CollectionService:AddTag(unit_model, owner)
     unit.Model = unit_model
@@ -24682,11 +24670,9 @@ return map_decoration]]></ProtectedString>
 				<Content name="LinkedSource"><null></null></Content>
 				<string name="Name">test</string>
 				<string name="ScriptGuid">{50FFB28C-CACF-4926-AA20-9B096D18B4FF}</string>
-				<ProtectedString name="Source"><![CDATA[local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Players = game:GetService("Players")
+				<ProtectedString name="Source"><![CDATA[local Players = game:GetService("Players")
 
 local Modules = script.Parent.Modules
-local Packages = ReplicatedStorage:WaitForChild("Packages")
 
 local GameManager = require(Modules.GameManager)
 
@@ -68087,6 +68073,24 @@ end]]></ProtectedString>
 						</Item>
 					</Item>
 				</Item>
+			</Item>
+		</Item>
+		<Item class="Folder" referent="RBXDB4C71A4904549918513265EF429A543">
+			<Properties>
+				<BinaryString name="AttributesSerialize"></BinaryString>
+				<string name="Name">Remotes</string>
+				<int64 name="SourceAssetId">-1</int64>
+				<BinaryString name="Tags"></BinaryString>
+				<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d0450dacf</UniqueId>
+			</Properties>
+			<Item class="RemoteFunction" referent="RBXE17350E207634D0DA3E9F6D95464F1C5">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<string name="Name">Function_GetMap</string>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d0450dad0</UniqueId>
+				</Properties>
 			</Item>
 		</Item>
 	</Item>
