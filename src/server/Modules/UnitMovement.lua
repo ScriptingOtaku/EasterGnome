@@ -24,7 +24,7 @@ function check_range(unit: table, position: Vector3)
                     if new_tile.Unit.Owner == "Enemy" then
                         print("Attack")
                         local destroy = new_tile.Unit.Model
-                        new_tile.Unit = unit --DEBUG: change later
+                        new_tile.Unit = unit
                         return true, destroy
                     elseif new_tile.Unit.Owner == "Player" then
                         -- unit can't attack own units
