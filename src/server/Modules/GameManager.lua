@@ -9,6 +9,7 @@
 local Modules = script.Parent
 local MapGeneration = require(Modules.MapGeneration)
 local MapDecoration = require(Modules.MapDecoration)
+local UnitGeneration = require(Modules.UnitGeneration)
 
 local game_manager = {}
 
@@ -21,6 +22,11 @@ function game_manager:start_game(_player: Player)
     local map = MapGeneration:create_map()
     map.place_tiles(map_folder)
     MapDecoration:place(map)
+
+    UnitGeneration:add_to_generation(UnitGeneration.Units.Soldier, 50)
+    UnitGeneration:add_to_generation(UnitGeneration.Units.Tank, 25)
+    UnitGeneration:add_to_generation(UnitGeneration.Units.Ambulance, 25)
+    UnitGeneration:generate(map)
 end
 
 return game_manager

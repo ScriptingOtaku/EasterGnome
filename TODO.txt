@@ -8,3 +8,8 @@ Unit Fights
 Good Terrain
 Resource Collection
 Story (Short)
+
+Backlog:
+Spawn things with seed instead of randomly
+    * Units
+    * Structures

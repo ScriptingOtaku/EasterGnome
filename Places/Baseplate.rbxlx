@@ -80,27 +80,27 @@
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>-13.4921598</X>
-					<Y>5.382236</Y>
-					<Z>-0.885087311</Z>
-					<R00>-0.0658034384</R00>
-					<R01>0.172748566</R01>
-					<R02>-0.982765436</R02>
-					<R10>-9.31322575e-10</R10>
-					<R11>0.984900117</R11>
-					<R12>0.173123792</R12>
-					<R20>0.997832596</R20>
-					<R21>0.0113921417</R21>
-					<R22>-0.0648098141</R22>
+					<X>-16.3498192</X>
+					<Y>20.6639595</Y>
+					<Z>-2.32438421</Z>
+					<R00>-0.184568167</R00>
+					<R01>0.484396964</R01>
+					<R02>-0.855157435</R02>
+					<R10>-0</R10>
+					<R11>0.870106101</R11>
+					<R12>0.492864519</R12>
+					<R20>0.982819736</R20>
+					<R21>0.0909671038</R21>
+					<R22>-0.160593882</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>-11.5266285</X>
-					<Y>5.03598833</Y>
-					<Z>-0.755467653</Z>
+					<X>-14.6395006</X>
+					<Y>19.6782284</Y>
+					<Z>-2.00319576</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -261,7 +261,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<CFrame>
 						<X>0</X>
 						<Y>0</Y>
-						<Z>0</Z>
+						<Z>-4</Z>
 						<R00>0</R00>
 						<R01>0</R01>
 						<R02>-1</R02>
@@ -308,7 +308,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>0</X>
 							<Y>2.65377569</Y>
-							<Z>-0.899538279</Z>
+							<Z>-4.89953804</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -355,7 +355,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-0.745944798</X>
 								<Y>2.67242455</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -383,7 +383,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.07566857</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -478,7 +478,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.22485757</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -573,7 +573,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.37404656</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -668,7 +668,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.52323556</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -763,7 +763,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.67242455</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -858,7 +858,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.82161331</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -953,7 +953,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.97080183</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1048,7 +1048,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>3.11999083</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1144,7 +1144,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-0.372972369</X>
 							<Y>2.59783006</Y>
-							<Z>-0.91445756</Z>
+							<Z>-4.91445732</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>1</R02>
@@ -1258,7 +1258,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0</X>
 								<Y>2.67242455</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1286,7 +1286,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.07566857</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1381,7 +1381,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.22485757</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1476,7 +1476,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.37404656</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1571,7 +1571,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.52323556</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1666,7 +1666,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.67242455</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1761,7 +1761,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.82161331</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1856,7 +1856,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.97080183</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -1951,7 +1951,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>3.11999083</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2047,7 +2047,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>0.372972369</X>
 							<Y>2.59783006</Y>
-							<Z>-0.91445756</Z>
+							<Z>-4.91445732</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>1</R02>
@@ -2161,7 +2161,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0.745944738</X>
 								<Y>2.67242455</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2189,7 +2189,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.07566857</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2284,7 +2284,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.22485757</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2379,7 +2379,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.37404656</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2474,7 +2474,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.52323556</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2569,7 +2569,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.67242455</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2664,7 +2664,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.82161331</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2759,7 +2759,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.97080183</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2854,7 +2854,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>3.11999083</Y>
-								<Z>-0.91445756</Z>
+								<Z>-4.91445732</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -2950,7 +2950,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-2.84984708e-07</X>
 							<Y>2.42999268</Y>
-							<Z>-0.884619951</Z>
+							<Z>-4.88461971</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -3045,7 +3045,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-2.84984708e-07</X>
 							<Y>1.98242497</Y>
-							<Z>-0.899538338</Z>
+							<Z>-4.89953852</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -3160,7 +3160,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>-1.15621448</X>
 							<Y>2.65377569</Y>
-							<Z>-0.0790000483</Z>
+							<Z>-4.079</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>1</R02>
@@ -3188,7 +3188,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.15621483</X>
 							<Y>1.98242497</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>1</R02>
@@ -3302,7 +3302,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-1.17113316</X>
 								<Y>2.67242455</Y>
-								<Z>-0.936836004</Z>
+								<Z>-4.93683624</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3330,7 +3330,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.07566857</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3425,7 +3425,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.22485757</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3520,7 +3520,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.37404656</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3615,7 +3615,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.52323556</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3710,7 +3710,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.67242455</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3805,7 +3805,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.82161331</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3900,7 +3900,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.97080183</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -3995,7 +3995,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>3.11999083</Y>
-								<Z>-0.71305263</Z>
+								<Z>-4.71305275</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4091,7 +4091,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.14129639</X>
 							<Y>2.42999268</Y>
-							<Z>-0.71305263</Z>
+							<Z>-4.71305275</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>1</R02>
@@ -4205,7 +4205,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-1.17113316</X>
 								<Y>2.67242455</Y>
-								<Z>0.256675541</Z>
+								<Z>-3.74332452</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4233,7 +4233,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.07566857</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4328,7 +4328,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.22485757</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4423,7 +4423,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.37404656</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4518,7 +4518,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.52323556</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4613,7 +4613,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.67242455</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4708,7 +4708,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.82161331</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4803,7 +4803,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>2.97080183</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4898,7 +4898,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.17113316</X>
 								<Y>3.11999083</Y>
-								<Z>0.480458915</Z>
+								<Z>-3.51954103</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -4994,7 +4994,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.14129639</X>
 							<Y>2.42999268</Y>
-							<Z>0.480458915</Z>
+							<Z>-3.51954103</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>1</R02>
@@ -5089,7 +5089,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.15621483</X>
 							<Y>2.59783006</Y>
-							<Z>0.293973207</Z>
+							<Z>-3.70602679</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -5184,7 +5184,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.15621483</X>
 							<Y>2.59783006</Y>
-							<Z>-0.526566863</Z>
+							<Z>-4.52656698</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -5299,7 +5299,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>0</X>
 							<Y>3.54890895</Y>
-							<Z>-0.11629682</Z>
+							<Z>-4.11629677</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -5328,7 +5328,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>1.17113209</X>
 							<Y>3.6048553</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -5438,7 +5438,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>0.372972369</X>
 							<Y>3.19458532</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -5548,7 +5548,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-0.372972369</X>
 							<Y>3.19458532</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -5658,7 +5658,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.171134</X>
 							<Y>3.6048553</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -5786,7 +5786,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-0.760864615</X>
 								<Y>3.59545732</Y>
-								<Z>0.271723509</Z>
+								<Z>-3.72827649</Z>
 								<R00>-0.999999881</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -5814,7 +5814,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.93830657</Y>
-								<Z>-0.0711273402</Z>
+								<Z>-4.07112741</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -5909,7 +5909,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.83281493</Y>
-								<Z>0.034364596</Z>
+								<Z>-3.9656353</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6004,7 +6004,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.72732186</Y>
-								<Z>0.13985835</Z>
+								<Z>-3.86014175</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6099,7 +6099,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.62182975</Y>
-								<Z>0.245349377</Z>
+								<Z>-3.75465059</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6194,7 +6194,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.51633763</Y>
-								<Z>0.350842237</Z>
+								<Z>-3.64915776</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6289,7 +6289,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.41084504</Y>
-								<Z>0.456335068</Z>
+								<Z>-3.54366493</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6384,7 +6384,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.30535245</Y>
-								<Z>0.561827898</Z>
+								<Z>-3.4381721</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6479,7 +6479,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.22623372</Y>
-								<Z>0.640945733</Z>
+								<Z>-3.35905433</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6594,7 +6594,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0.0149186635</X>
 								<Y>3.59545732</Y>
-								<Z>0.271723509</Z>
+								<Z>-3.72827649</Z>
 								<R00>-0.999999881</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6622,7 +6622,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.93830657</Y>
-								<Z>-0.0711273402</Z>
+								<Z>-4.07112741</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6717,7 +6717,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.83281493</Y>
-								<Z>0.034364596</Z>
+								<Z>-3.9656353</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6812,7 +6812,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.72732186</Y>
-								<Z>0.13985835</Z>
+								<Z>-3.86014175</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -6907,7 +6907,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.62182975</Y>
-								<Z>0.245349377</Z>
+								<Z>-3.75465059</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7002,7 +7002,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.51633763</Y>
-								<Z>0.350842237</Z>
+								<Z>-3.64915776</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7097,7 +7097,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.41084504</Y>
-								<Z>0.456335068</Z>
+								<Z>-3.54366493</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7192,7 +7192,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.30535245</Y>
-								<Z>0.561827898</Z>
+								<Z>-3.4381721</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7287,7 +7287,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.0149186617</X>
 								<Y>3.22623372</Y>
-								<Z>0.640945733</Z>
+								<Z>-3.35905433</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7402,7 +7402,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0.760863423</X>
 								<Y>3.59545732</Y>
-								<Z>0.271723509</Z>
+								<Z>-3.72827649</Z>
 								<R00>-0.999999881</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7430,7 +7430,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.93830657</Y>
-								<Z>-0.0711273402</Z>
+								<Z>-4.07112741</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7525,7 +7525,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.83281493</Y>
-								<Z>0.034364596</Z>
+								<Z>-3.9656353</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7620,7 +7620,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.72732186</Y>
-								<Z>0.13985835</Z>
+								<Z>-3.86014175</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7715,7 +7715,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.62182975</Y>
-								<Z>0.245349377</Z>
+								<Z>-3.75465059</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7810,7 +7810,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.51633763</Y>
-								<Z>0.350842237</Z>
+								<Z>-3.64915776</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -7905,7 +7905,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.41084504</Y>
-								<Z>0.456335068</Z>
+								<Z>-3.54366493</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8000,7 +8000,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.30535245</Y>
-								<Z>0.561827898</Z>
+								<Z>-3.4381721</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8095,7 +8095,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.22623372</Y>
-								<Z>0.640945733</Z>
+								<Z>-3.35905433</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8210,7 +8210,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0.760863423</X>
 								<Y>3.59545732</Y>
-								<Z>-0.504058778</Z>
+								<Z>-4.50405884</Z>
 								<R00>0.999999881</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8238,7 +8238,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.93830657</Y>
-								<Z>-0.161208883</Z>
+								<Z>-4.16120911</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8333,7 +8333,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.83281493</Y>
-								<Z>-0.266700804</Z>
+								<Z>-4.26670074</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8428,7 +8428,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.72732186</Y>
-								<Z>-0.37219274</Z>
+								<Z>-4.37219286</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8523,7 +8523,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.62182975</Y>
-								<Z>-0.477685601</Z>
+								<Z>-4.47768545</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8618,7 +8618,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.51633763</Y>
-								<Z>-0.583178461</Z>
+								<Z>-4.58317852</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8713,7 +8713,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.41084504</Y>
-								<Z>-0.68867135</Z>
+								<Z>-4.68867111</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8808,7 +8808,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.30535245</Y>
-								<Z>-0.794163227</Z>
+								<Z>-4.79416323</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -8903,7 +8903,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.760862112</X>
 								<Y>3.22623372</Y>
-								<Z>-0.873281956</Z>
+								<Z>-4.87328196</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9018,7 +9018,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-0.0149198016</X>
 								<Y>3.59545732</Y>
-								<Z>-0.504058778</Z>
+								<Z>-4.50405884</Z>
 								<R00>0.999999881</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9046,7 +9046,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.93830657</Y>
-								<Z>-0.161208883</Z>
+								<Z>-4.16120911</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9141,7 +9141,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.83281493</Y>
-								<Z>-0.266700804</Z>
+								<Z>-4.26670074</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9236,7 +9236,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.72732186</Y>
-								<Z>-0.37219274</Z>
+								<Z>-4.37219286</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9331,7 +9331,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.62182975</Y>
-								<Z>-0.477685601</Z>
+								<Z>-4.47768545</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9426,7 +9426,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.51633763</Y>
-								<Z>-0.583178461</Z>
+								<Z>-4.58317852</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9521,7 +9521,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.41084504</Y>
-								<Z>-0.68867135</Z>
+								<Z>-4.68867111</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9616,7 +9616,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.30535245</Y>
-								<Z>-0.794163227</Z>
+								<Z>-4.79416323</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9711,7 +9711,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.0149198016</X>
 								<Y>3.22623372</Y>
-								<Z>-0.873281956</Z>
+								<Z>-4.87328196</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9826,7 +9826,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-0.760864615</X>
 								<Y>3.59545732</Y>
-								<Z>-0.504058778</Z>
+								<Z>-4.50405884</Z>
 								<R00>0.999999881</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9854,7 +9854,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.93830657</Y>
-								<Z>-0.161208883</Z>
+								<Z>-4.16120911</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -9949,7 +9949,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.83281493</Y>
-								<Z>-0.266700804</Z>
+								<Z>-4.26670074</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -10044,7 +10044,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.72732186</Y>
-								<Z>-0.37219274</Z>
+								<Z>-4.37219286</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -10139,7 +10139,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.62182975</Y>
-								<Z>-0.477685601</Z>
+								<Z>-4.47768545</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -10234,7 +10234,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.51633763</Y>
-								<Z>-0.583178461</Z>
+								<Z>-4.58317852</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -10329,7 +10329,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.41084504</Y>
-								<Z>-0.68867135</Z>
+								<Z>-4.68867111</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -10424,7 +10424,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.30535245</Y>
-								<Z>-0.794163227</Z>
+								<Z>-4.79416323</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -10519,7 +10519,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.760864854</X>
 								<Y>3.22623372</Y>
-								<Z>-0.873281956</Z>
+								<Z>-4.87328196</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -10615,7 +10615,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-2.84984708e-07</X>
 							<Y>3.61952853</Y>
-							<Z>0.300398111</Z>
+							<Z>-3.69960189</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -10710,7 +10710,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>3.42354178e-06</X>
 							<Y>3.60897899</Y>
-							<Z>-0.543541074</Z>
+							<Z>-4.54354095</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -10825,7 +10825,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>1.15621424</X>
 							<Y>2.65377569</Y>
-							<Z>-0.153594524</Z>
+							<Z>-4.15359449</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -10853,7 +10853,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>1.15621376</X>
 							<Y>1.98242497</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -10967,7 +10967,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>1.17113292</X>
 								<Y>2.67242455</Y>
-								<Z>0.256675541</Z>
+								<Z>-3.74332452</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -10995,7 +10995,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.07566857</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11090,7 +11090,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.22485757</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11185,7 +11185,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.37404656</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11280,7 +11280,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.52323556</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11375,7 +11375,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.67242455</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11470,7 +11470,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.82161331</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11565,7 +11565,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.97080183</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11660,7 +11660,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>3.11999083</Y>
-								<Z>0.256674618</Z>
+								<Z>-3.74332547</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11775,7 +11775,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>1.17113292</X>
 								<Y>2.67242455</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11803,7 +11803,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.07566857</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11898,7 +11898,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.22485757</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -11993,7 +11993,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.37404656</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -12088,7 +12088,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.52323556</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -12183,7 +12183,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.67242455</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -12278,7 +12278,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.82161331</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -12373,7 +12373,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>2.97080183</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -12468,7 +12468,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>1.17113209</X>
 								<Y>3.11999083</Y>
-								<Z>-0.489269197</Z>
+								<Z>-4.48926926</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>-1</R02>
@@ -12564,7 +12564,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>1.17113209</X>
 							<Y>2.59783006</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -12659,7 +12659,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>1.14129543</X>
 							<Y>2.42999268</Y>
-							<Z>-0.116296828</Z>
+							<Z>-4.11629677</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -12774,7 +12774,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>0</X>
 							<Y>2.65377569</Y>
-							<Z>0.666944683</Z>
+							<Z>-3.33305526</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -12821,7 +12821,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0.745944738</X>
 								<Y>2.67242455</Y>
-								<Z>0.681863964</Z>
+								<Z>-3.31813598</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -12849,7 +12849,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.07566857</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -12944,7 +12944,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.22485757</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13039,7 +13039,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.37404656</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13134,7 +13134,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.52323556</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13229,7 +13229,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.67242455</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13324,7 +13324,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.82161331</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13419,7 +13419,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>2.97080183</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13514,7 +13514,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.745943785</X>
 								<Y>3.11999083</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13629,7 +13629,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0</X>
 								<Y>2.67242455</Y>
-								<Z>0.681863964</Z>
+								<Z>-3.31813598</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13657,7 +13657,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.07566857</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13752,7 +13752,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.22485757</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13847,7 +13847,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.37404656</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -13942,7 +13942,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>3.11999083</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14057,7 +14057,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-0.745944798</X>
 								<Y>2.67242455</Y>
-								<Z>0.681863964</Z>
+								<Z>-3.31813598</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14085,7 +14085,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.07566857</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14180,7 +14180,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.22485757</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14275,7 +14275,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.37404656</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14370,7 +14370,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.52323556</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14465,7 +14465,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.67242455</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14560,7 +14560,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.82161331</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14655,7 +14655,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>2.97080183</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14750,7 +14750,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.745944738</X>
 								<Y>3.11999083</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -14846,7 +14846,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-0.372972369</X>
 							<Y>2.59783006</Y>
-							<Z>0.681864858</Z>
+							<Z>-3.31813526</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -14941,7 +14941,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>0.372972369</X>
 							<Y>2.59783006</Y>
-							<Z>0.681864858</Z>
+							<Z>-3.31813526</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -15036,7 +15036,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-2.84984708e-07</X>
 							<Y>2.42999268</Y>
-							<Z>0.652026296</Z>
+							<Z>-3.34797382</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -15131,7 +15131,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-2.84984708e-07</X>
 							<Y>1.98242497</Y>
-							<Z>0.666944623</Z>
+							<Z>-3.3330555</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -15226,7 +15226,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-2.84984708e-07</X>
 							<Y>3.03047705</Y>
-							<Z>0.67440474</Z>
+							<Z>-3.32559538</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -15340,7 +15340,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>0</X>
 								<Y>3.01555872</Y>
-								<Z>0.67440474</Z>
+								<Z>-3.32559538</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -15369,7 +15369,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.77007556</Y>
-								<Z>0.816133618</Z>
+								<Z>-3.1838665</Z>
 								<R00>0</R00>
 								<R01>1</R01>
 								<R02>0</R02>
@@ -15478,7 +15478,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>3.00263834</Y>
-								<Z>0.681864858</Z>
+								<Z>-3.31813526</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -15573,7 +15573,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.328215033</X>
 								<Y>2.77007556</Y>
-								<Z>0.816133618</Z>
+								<Z>-3.1838665</Z>
 								<R00>0</R00>
 								<R01>1</R01>
 								<R02>0</R02>
@@ -15668,7 +15668,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.328215033</X>
 								<Y>2.77007556</Y>
-								<Z>0.816133618</Z>
+								<Z>-3.1838665</Z>
 								<R00>0</R00>
 								<R01>1</R01>
 								<R02>0</R02>
@@ -15763,7 +15763,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.53751397</Y>
-								<Z>0.950404167</Z>
+								<Z>-3.04959583</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -15858,7 +15858,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-2.84984708e-07</X>
 								<Y>2.77007556</Y>
-								<Z>0.816133618</Z>
+								<Z>-3.1838665</Z>
 								<R00>1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -15953,7 +15953,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-0.350594819</X>
 								<Y>2.72464061</Y>
-								<Z>0.756458402</Z>
+								<Z>-3.24354172</Z>
 								<R00>0.258818984</R00>
 								<R01>0</R01>
 								<R02>-0.965925872</R02>
@@ -16048,7 +16048,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>0.350593925</X>
 								<Y>2.72464061</Y>
-								<Z>0.756458402</Z>
+								<Z>-3.24354172</Z>
 								<R00>-0.258818984</R00>
 								<R01>0</R01>
 								<R02>-0.965925872</R02>
@@ -16145,7 +16145,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<CoordinateFrame name="CFrame">
 						<X>-2.84984708e-07</X>
 						<Y>1.97869587</Y>
-						<Z>-0.116296828</Z>
+						<Z>-4.11629677</Z>
 						<R00>0</R00>
 						<R01>0</R01>
 						<R02>-1</R02>
@@ -16259,7 +16259,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>-1.21402586</X>
 							<Y>2.59783006</Y>
-							<Z>-0.489269197</Z>
+							<Z>-4.48926926</Z>
 							<R00>-1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -16306,7 +16306,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CFrame>
 								<X>-1.18605185</X>
 								<Y>2.59783006</Y>
-								<Z>-0.340080231</Z>
+								<Z>-4.34008026</Z>
 								<R00>-1</R00>
 								<R01>0</R01>
 								<R02>0</R02>
@@ -16334,7 +16334,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>3.11999083</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -16429,7 +16429,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>2.97080183</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -16524,7 +16524,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>2.82161331</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -16619,7 +16619,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>2.67242455</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -16714,7 +16714,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>2.52323556</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -16809,7 +16809,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>2.37404656</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -16904,7 +16904,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>2.22485757</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -16999,7 +16999,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<CoordinateFrame name="CFrame">
 								<X>-1.18605149</X>
 								<Y>2.07566857</Y>
-								<Z>-0.116296828</Z>
+								<Z>-4.11629677</Z>
 								<R00>0</R00>
 								<R01>0</R01>
 								<R02>1</R02>
@@ -17096,7 +17096,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.2170403</X>
 							<Y>2.6052897</Y>
-							<Z>0.107486591</Z>
+							<Z>-3.89251351</Z>
 							<R00>0</R00>
 							<R01>-1</R01>
 							<R02>0</R02>
@@ -17206,7 +17206,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.19724154</X>
 							<Y>2.97826147</Y>
-							<Z>-0.396025419</Z>
+							<Z>-4.39602566</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -17316,7 +17316,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.19724154</X>
 							<Y>2.23231673</Y>
-							<Z>-0.396025419</Z>
+							<Z>-4.39602566</Z>
 							<R00>0</R00>
 							<R01>0</R01>
 							<R02>-1</R02>
@@ -17426,7 +17426,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-1.171134</X>
 							<Y>2.58291125</Y>
-							<Z>-0.116298646</Z>
+							<Z>-4.11629868</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -17537,7 +17537,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<CoordinateFrame name="CFrame">
 						<X>-1.19724071</X>
 						<Y>2.97826147</Y>
-						<Z>-0.504188418</Z>
+						<Z>-4.50418854</Z>
 						<R00>0</R00>
 						<R01>0</R01>
 						<R02>-1</R02>
@@ -17647,7 +17647,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<CoordinateFrame name="CFrame">
 						<X>-1.19724071</X>
 						<Y>2.23231673</Y>
-						<Z>-0.504188418</Z>
+						<Z>-4.50418854</Z>
 						<R00>0</R00>
 						<R01>0</R01>
 						<R02>-1</R02>
@@ -17757,7 +17757,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<CoordinateFrame name="CFrame">
 						<X>0</X>
 						<Y>3.00793195</Y>
-						<Z>-0.116296828</Z>
+						<Z>-4.11629677</Z>
 						<R00>-1</R00>
 						<R01>0</R01>
 						<R02>0</R02>
@@ -17910,7 +17910,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<CoordinateFrame name="CFrame">
 					<X>0</X>
 					<Y>0</Y>
-					<Z>0</Z>
+					<Z>-4</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -18045,7 +18045,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<CoordinateFrame name="CFrame">
 					<X>0</X>
 					<Y>0</Y>
-					<Z>-4</Z>
+					<Z>-8</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -18199,7 +18199,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 					<CFrame>
 						<X>-0.00886675715</X>
 						<Y>0</Y>
-						<Z>-4.09202051</Z>
+						<Z>-8.09202003</Z>
 						<R00>1</R00>
 						<R01>0</R01>
 						<R02>0</R02>
@@ -18246,7 +18246,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>0.399180651</X>
 							<Y>3.17614746</Y>
-							<Z>-4.50554085</Z>
+							<Z>-8.50554085</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18274,7 +18274,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>0.399702489</X>
 							<Y>2.66142225</Y>
-							<Z>-4.57211018</Z>
+							<Z>-8.57211018</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18387,7 +18387,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>0.399180651</X>
 							<Y>3.58091664</Y>
-							<Z>-4.50554085</Z>
+							<Z>-8.50554085</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18520,7 +18520,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>-0.600819349</X>
 							<Y>2.92614746</Y>
-							<Z>-3.50554085</Z>
+							<Z>-7.50554085</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18548,7 +18548,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-0.600408435</X>
 							<Y>2.52083135</Y>
-							<Z>-3.55796027</Z>
+							<Z>-7.55796051</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18661,7 +18661,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-0.600819349</X>
 							<Y>3.24487948</Y>
-							<Z>-3.50554085</Z>
+							<Z>-7.50554085</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18794,7 +18794,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CFrame>
 							<X>-0.600819349</X>
 							<Y>2.67614746</Y>
-							<Z>-4.50554085</Z>
+							<Z>-8.50554085</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18822,7 +18822,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-0.600519359</X>
 							<Y>2.38024044</Y>
-							<Z>-4.54381037</Z>
+							<Z>-8.54380989</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -18935,7 +18935,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 						<CoordinateFrame name="CFrame">
 							<X>-0.600819349</X>
 							<Y>2.90884233</Y>
-							<Z>-4.50554085</Z>
+							<Z>-8.50554085</Z>
 							<R00>1</R00>
 							<R01>0</R01>
 							<R02>0</R02>
@@ -19050,7 +19050,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<CoordinateFrame name="CFrame">
 					<X>0</X>
 					<Y>0</Y>
-					<Z>-8</Z>
+					<Z>-12</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -19185,7 +19185,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<CoordinateFrame name="CFrame">
 					<X>0</X>
 					<Y>2.5</Y>
-					<Z>-8</Z>
+					<Z>-12</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -19298,7 +19298,7 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<CoordinateFrame name="CFrame">
 					<X>0</X>
 					<Y>0</Y>
-					<Z>4</Z>
+					<Z>0</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -20001,6 +20001,7 @@ CameraHandler:center()]]></ProtectedString>
 
 local Modules = script.Parent
 local MapGeneration = require(Modules.MapGeneration)
+local MapDecoration = require(Modules.MapDecoration)
 
 local game_manager = {}
 
@@ -20012,6 +20013,7 @@ function game_manager:start_game(_player: Player)
     -- start single player game
     local map = MapGeneration:create_map()
     map.place_tiles(map_folder)
+    MapDecoration:place(map)
 end
 
 return game_manager]]></ProtectedString>
@@ -20228,7 +20230,7 @@ function generation:create_map(map_def: Map_Def) --> Map
             tile_instance.Anchored = true
             tile_instance.Parent = parent
 
-            tile_instances[tile.x .. "," .. tile.y] = tile_instance
+            tile_instances[tile] = tile_instance
         end
         map.wall_instances = generate_walls(map, parent)
         map.tile_instances = tile_instances
@@ -20259,9 +20261,41 @@ return generation]]></ProtectedString>
     Takes a map, then generates units.
 ]]
 
-local UnitGeneration = {}
+local unit_generation = {}
 
-return UnitGeneration]]></ProtectedString>
+local Units: Unit = {
+    Soldier = 1,
+    Tank = 2,
+    Ambulance = 3,
+}
+type Unit = {
+    UnitName: string,
+}
+type Map = { -- Map; the actual map
+width: number,
+height: number,
+terrain_types: Terrain_Type,
+seed: number,
+tiles: table,
+wall_instances: table,
+tile_instances: table,
+place_tiles: () -> Tile,
+get_tile: (x: number, y: number) -> Tile,
+}
+
+local Units_to_Spawn: Unit = {}
+
+function unit_generation:add_to_generation(unit: Unit)
+    if not Units_to_Spawn[unit] then
+        Units_to_Spawn[unit] = true
+    end
+end
+
+function unit_generation:generate(map: Map)
+    local tiles: Tile = map.tiles
+end
+
+return unit_generation]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d000b5698</UniqueId>
@@ -20273,7 +20307,8 @@ return UnitGeneration]]></ProtectedString>
 					<Content name="LinkedSource"><null></null></Content>
 					<string name="Name">MapDecoration</string>
 					<string name="ScriptGuid">{F8E2BFFE-5FB0-4F3E-B8EF-0818D5E5F556}</string>
-					<ProtectedString name="Source"><![CDATA[local ReplicatedStorage = game:GetService("ReplicatedStorage")
+					<ProtectedString name="Source"><![CDATA[local CollectionService = game:GetService("CollectionService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 --[[
     @ScriptingOtaku
 
@@ -20311,35 +20346,50 @@ type Map = { -- Map; the actual map
     get_tile: (x: number, y: number) -> Tile,
 }
 
+local FOREST_CHANCE = 50
+local MOUNTAIN_CHANCE = 50
+
 local Assets = ReplicatedStorage:WaitForChild("Assets")
 
 function map_decoration:place(map: Map)
-    local tiles = map.tiles
-    local tile_instances = map.tile_instances
+    local tiles: Tile = map.tiles
+    local tile_instances: Instance = map.tile_instances
 
     for _, tile in pairs(tiles) do
-        local tile_instance = tile_instances[tile.x .. "," .. tile.y]
-        if tile_instance then
-            local terrain_type = tile.TerrainType
-            if terrain_type == Terrain_Type.Sea then
-                -- change tile to water tile
-                tile_instance.Color = BrickColor.new("Bright blue").Color
-            elseif terrain_type == Terrain_Type.Forest then
-                -- place forest decoration
-                tile_instance.Color = BrickColor.new("Earth green").Color
-                local forest_decoration = Assets:WaitForChild("Forest"):Clone()
-                forest_decoration.Parent = tile_instance
+        local tile_instance: Instance = tile_instances[tile]
+        local terrain_type: Terrain_Type = tile.TerrainType
+        local decoration: Instance = nil
 
-            elseif terrain_type == Terrain_Type.Mountain then
-                -- place mountain decoration
-                tile_instance.Color = BrickColor.new("Dark stone grey").Color
-                local mountain_decoration = Assets:WaitForChild("Mountain"):Clone()
-                mountain_decoration.Parent = tile_instance
-
-            elseif terrain_type == Terrain_Type.GrassLand then
-                -- place grass decoration
-                tile_instance.Color = BrickColor.new("Sea green").Color
+        if terrain_type == Terrain_Type.Sea then
+            -- Change the tile to a sea tile
+            tile_instance.BrickColor = BrickColor.new("Bright blue")
+            tile_instance.Size = Vector3.new(
+                tile_instance.Size.X,
+                tile_instance.Size.Y / 2,
+                tile_instance.Size.Z
+            )
+            CollectionService:AddTag(tile_instance, "Sea")
+            tile_instance:FindFirstChildOfClass("Texture"):Destroy()
+        elseif terrain_type == Terrain_Type.Forest then
+            -- Add forest decoration
+            tile_instance.BrickColor = BrickColor.new("Earth green")
+            if math.random(1, 100) <= FOREST_CHANCE then
+                decoration = Assets:FindFirstChild("Forest_Decoration"):Clone()
             end
+        elseif terrain_type == Terrain_Type.Mountain then
+            -- Add mountain decoration
+            tile_instance.BrickColor = BrickColor.new("Dark stone grey")
+            if math.random(1, 100) <= MOUNTAIN_CHANCE then
+                decoration = Assets:FindFirstChild("Mountain_Decoration"):Clone()
+            end
+        elseif terrain_type == Terrain_Type.GrassLand then
+            tile_instance.BrickColor = BrickColor.new("Sea green")
+        end
+        if decoration then
+            decoration:PivotTo(tile_instance:GetPivot() * CFrame.Angles(
+                0, math.rad(math.random(0, 360)), 0
+            ))
+            decoration.Parent = tile_instance
         end
     end
 end
@@ -20365,7 +20415,6 @@ local Modules = script.Parent.Modules
 local Packages = ReplicatedStorage:WaitForChild("Packages")
 
 local GameManager = require(Modules.GameManager)
-local Janitor = require(Packages.Janitor)
 
 function separate_string(string: string, separator: string) --> Table
    local result: table = {}
@@ -20389,7 +20438,11 @@ Players.PlayerAdded:Connect(function(player: Player)
             GameManager:start_game(player)
         end
     end)
-end)]]></ProtectedString>
+end)
+
+task.wait(1)
+
+GameManager:start_game(nil)]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d000b56aa</UniqueId>
@@ -41183,7 +41236,7 @@ end]]></ProtectedString>
 						<Y>0</Y>
 						<Z>0</Z>
 					</Vector3>
-					<string name="Name">Forest</string>
+					<string name="Name">Forest_Decoration</string>
 					<bool name="NeedsPivotMigration">false</bool>
 					<Ref name="PrimaryPart">null</Ref>
 					<int64 name="SourceAssetId">-1</int64>
@@ -59760,7 +59813,7 @@ end]]></ProtectedString>
 					<string name="MaterialVariantSerialized"></string>
 					<Content name="MeshID"><url>rbxassetid://5349461931</url></Content>
 					<Content name="MeshId"><url>rbxassetid://5349461931</url></Content>
-					<string name="Name">Mountain</string>
+					<string name="Name">Mountain_Decoration</string>
 					<SharedString name="PhysicalConfigData">2snM+u+zXUAlhx+EPRRcuQ==</SharedString>
 					<BinaryString name="PhysicsData"></BinaryString>
 					<CoordinateFrame name="PivotOffset">
@@ -59808,6 +59861,15 @@ end]]></ProtectedString>
 						<Y>1</Y>
 						<Z>2</Z>
 					</Vector3>
+				</Properties>
+			</Item>
+			<Item class="Folder" referent="RBX1DF2CADD3ECA48D58343DAABDC2CC41B">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<string name="Name">Units</string>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d02c1dbd6</UniqueId>
 				</Properties>
 			</Item>
 		</Item>

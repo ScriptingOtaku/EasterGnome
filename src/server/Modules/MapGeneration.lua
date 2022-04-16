@@ -44,7 +44,8 @@ type Tile = {
     y: number,
     z: number,
     height: number,
-    TerrainType: Terrain_Type
+    TerrainType: Terrain_Type,
+    Unit: string,
 }
 type Map = { -- Map; the actual map
     width: number,
