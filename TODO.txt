@@ -4,7 +4,7 @@ Camera: Fit the camera to game board
 Simple Interface
 // Player Units
 // Enemy Units
-Unit Fights
+// Unit Fights
 Good Terrain
 Resource Collection
 Story (Short)

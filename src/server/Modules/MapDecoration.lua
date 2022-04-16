@@ -75,6 +75,9 @@ function map_decoration:place(map: Map)
             end
         elseif terrain_type == Terrain_Type.GrassLand then
             tile_instance.BrickColor = BrickColor.new("Sea green")
+            if math.random(1, 100) <= FOREST_CHANCE then
+                decoration = Assets:FindFirstChild("Shed"):Clone()
+            end
         end
         if decoration then
             decoration:PivotTo(tile_instance:GetPivot() * CFrame.Angles(
