@@ -10,9 +10,9 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local unit_generation = {}
 
 local Units: Unit = {
-    Soldier = 1,
-    Tank = 2,
-    Ambulance = 3,
+    Soldier = "Soldier",
+    Tank = "Tank",
+    Ambulance = "Ambulance",
 }
 unit_generation.Units = Units
 type Unit = {
@@ -52,7 +52,7 @@ get_tile: (x: number, y: number) -> Tile,
 local Units_to_Spawn: Unit = {}
 local Unit_Colours = {
     Enemy = Color3.fromRGB(123, 0, 0),
-    Friendly = Color3.fromRGB(0, 123, 0),
+    Player = Color3.fromRGB(0, 123, 0),
 }
 
 local unit_folder = workspace:FindFirstChild("Units") or Instance.new("Folder")
@@ -68,16 +68,11 @@ enemy_folder.Parent = unit_folder
 local Assets = ReplicatedStorage:WaitForChild("Assets")
 local Unit_Assets = Assets:WaitForChild("Units")
 
+local UNIT_SPAWN_CHANCE = 10
+
 function get_random(table: table) --> Item
-    local rand = math.random(1, 100)
-    local total = 0
-    for index, value in ipairs(table) do
-        total = total + value
-        if rand <= total then
-            return index
-        end
-    end
-    return table[math.random(1, #table)]
+    --TODO: FIX THIS
+    return "Soldier"
 end
 
 function colour_unit(unit_model: Instance, owner: string) --> Void
@@ -100,7 +95,7 @@ function spawn_unit(tile_instance: Instance, owner: string) --> Unit
 
     local unit_model = Unit_Assets:FindFirstChild(unit_choice):Clone()
     unit_model.Parent = (owner == "Player" and player_folder) or enemy_folder
-    unit_model:PivotTo(tile_instance:GetPivot())
+    unit_model:PivotTo(tile_instance:GetPivot() * CFrame.new(0, tile_instance.size.Y * 2, 0))
 
     colour_unit(unit_model, owner)
 
@@ -126,16 +121,16 @@ function unit_generation:generate(map: Map) --> [Unit]
     for _, tile in pairs(tiles) do
         local tile_instance: Instance = tile_instances[tile]
         if tile.TerrainType ~= Terrain_Type.Sea then 
-            local unit
-            if tile.X > map.width / 2 then
-                -- Player
-                unit = spawn_unit(tile_instance, "Player")
-            else
-                -- Enemy
-                unit = spawn_unit(tile_instance, "Enemy")
+            if math.random(100) <= UNIT_SPAWN_CHANCE then
+                local unit
+                if math.random(2) == 1 then
+                    unit = spawn_unit(tile_instance, "Player")
+                else
+                    unit = spawn_unit(tile_instance, "Enemy")
+                end
+                tile.Unit = unit
+                table.insert(units_added, unit)
             end
-            tile.Unit = unit
-            table.insert(units_added, unit)
         end
     end
 
