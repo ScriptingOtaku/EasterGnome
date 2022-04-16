@@ -1,3 +1,5 @@
+local CollectionService = game:GetService("CollectionService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 --[[
     @ScriptingOtaku
 
@@ -15,6 +17,25 @@ local Units: Unit = {
 unit_generation.Units = Units
 type Unit = {
     UnitName: string,
+    Owner: Player,
+    Model: Instance,
+    Position: Vector2,
+}type Terrain_Type = {
+    TerrainType: table
+}
+local Terrain_Type = { -- Terrain Type Enum
+    Sea = 0,
+    Forest = 1,
+    Mountain = 2,
+    GrassLand = 3,
+}
+type Tile = {
+    x: number,
+    y: number,
+    z: number,
+    height: number,
+    TerrainType: Terrain_Type,
+    Unit: Unit,
 }
 type Map = { -- Map; the actual map
 width: number,
@@ -34,6 +55,19 @@ local Unit_Colours = {
     Friendly = Color3.fromRGB(0, 123, 0),
 }
 
+local unit_folder = workspace:FindFirstChild("Units") or Instance.new("Folder")
+unit_folder.Name = "Units"
+unit_folder.Parent = workspace
+local player_folder = unit_folder:FindFirstChild("Player") or Instance.new("Folder")
+player_folder.Name = "Player"
+player_folder.Parent = unit_folder
+local enemy_folder = unit_folder:FindFirstChild("Enemy") or Instance.new("Folder")
+enemy_folder.Name = "Enemy"
+enemy_folder.Parent = unit_folder
+
+local Assets = ReplicatedStorage:WaitForChild("Assets")
+local Unit_Assets = Assets:WaitForChild("Units")
+
 function get_random(table: table) --> Item
     local rand = math.random(1, 100)
     local total = 0
@@ -44,6 +78,36 @@ function get_random(table: table) --> Item
         end
     end
     return table[math.random(1, #table)]
+end
+
+function colour_unit(unit_model: Instance, owner: string) --> Void
+    local unit_colour = Unit_Colours[owner]
+    local config = unit_model:FindFirstChildOfClass("Configuration")
+    if config then
+        for _, value in pairs(config:GetChildren()) do
+            if value.Value then
+                value.Value.Color = unit_colour
+            end
+        end
+    end
+end
+
+function spawn_unit(tile_instance: Instance, owner: string) --> Unit
+    local unit_choice = get_random(Units_to_Spawn)
+    local unit = {}
+    unit.UnitName = unit_choice
+    unit.Owner = owner
+
+    local unit_model = Unit_Assets:FindFirstChild(unit_choice):Clone()
+    unit_model.Parent = (owner == "Player" and player_folder) or enemy_folder
+    unit_model:PivotTo(tile_instance:GetPivot())
+
+    colour_unit(unit_model, owner)
+
+    CollectionService:AddTag(unit_model, owner)
+    unit.Model = unit_model
+
+    return unit
 end
 
 function unit_generation:add_to_generation(unit: Unit, chance: number) --> Void
@@ -59,7 +123,21 @@ function unit_generation:generate(map: Map) --> [Unit]
     local tiles: Tile = map.tiles
     local tile_instances: Instance = map.tile_instances
 
-    for 
+    for _, tile in pairs(tiles) do
+        local tile_instance: Instance = tile_instances[tile]
+        if tile.TerrainType ~= Terrain_Type.Sea then 
+            local unit
+            if tile.X > map.width / 2 then
+                -- Player
+                unit = spawn_unit(tile_instance, "Player")
+            else
+                -- Enemy
+                unit = spawn_unit(tile_instance, "Enemy")
+            end
+            tile.Unit = unit
+            table.insert(units_added, unit)
+        end
+    end
 
     return units_added
 end
