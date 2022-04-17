@@ -4,6 +4,10 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Packages = ReplicatedStorage:WaitForChild("Packages")
 local Roact = require(Packages.Roact)
 
+local Modules = script.Parent:WaitForChild("Modules")
+
+local PlacementHandler = require(Modules.PlacementHandler)
+
 local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
 
@@ -29,6 +33,8 @@ Roact.mount(
             TextScaled = true,
             [Roact.Event.Activated] = function()
                 End_Game:FireServer()
+                PlacementHandler:stop()
+                PlacementHandler:start()
             end,
         }, {
             Roact.createElement("UICorner", {

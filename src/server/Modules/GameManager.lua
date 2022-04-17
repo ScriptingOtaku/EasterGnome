@@ -52,7 +52,7 @@ function enemy_move()
         return
     end
     EnemyMovement:Run(map)
-    game_manager:change_turn()
+    game_manager:change_turn(true)
 end
 
 function game_manager:start_game() 
@@ -70,6 +70,8 @@ function game_manager:start_game()
 
     UnitMovement.map = map
     self.Playing = true
+    self.Turn = true
+    turn_value.Value = true
 
     check_for_win()
 end
@@ -82,11 +84,12 @@ function game_manager:end_game()
     map = nil
 end
 
-function game_manager:change_turn()
-    self.Turn = not self.Turn
+function game_manager:change_turn(value: boolean)
+    self.Turn = value or not self.Turn
     turn_value.Value = self.Turn
     if check_for_win() then
-        self:end_game()
+        game_manager:end_game()
+        return
     end
 end
 
