@@ -151,6 +151,8 @@ function unit_generation:generate(map: Map) --> [Unit]
     local tiles: Tile = map.tiles
     local tile_instances: Instance = map.tile_instances
 
+    print("Generating units...")
+
     for _, tile in pairs(tiles) do
         local tile_instance: Instance = tile_instances[tile]
         if tile.TerrainType ~= Terrain_Type.Sea then 
@@ -166,6 +168,7 @@ function unit_generation:generate(map: Map) --> [Unit]
             end
         end
     end
+    units_added = {}
 
     return units_added
 end

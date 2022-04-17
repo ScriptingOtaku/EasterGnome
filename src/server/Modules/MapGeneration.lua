@@ -214,6 +214,11 @@ function generation:create_map(map_def: Map_Def) --> Map
         for _, wall in pairs(map.wall_instances) do
             wall:Destroy()
         end
+        for _, unit in pairs(workspace.Units:GetDescendants()) do
+            if not unit:IsA("Folder") then
+                unit:Destroy()
+            end
+        end
         for _, _v in pairs(map) do
             _v = nil
         end

@@ -39,7 +39,6 @@ function check_for_win() --> (bool)
     local Units = workspace.Units
     local enemy_count = #Units.Enemy:GetChildren()
     local player_count = #Units.Player:GetChildren()
-    print(enemy_count, player_count)
     if enemy_count == 0 or player_count == 0 then
         return true
     end
@@ -48,7 +47,6 @@ end
 
 function enemy_move()
     task.wait(math.random(1, 5))
-    print(check_for_win())
     if check_for_win() then
         game_manager:end_game()
         return
@@ -59,7 +57,9 @@ end
 
 function game_manager:start_game() 
     -- start single player game
-    map = MapGeneration:create_map()
+    map = MapGeneration:create_map({
+        seed = Random.new():NextNumber(0, 10e6)
+    })
     map.place_tiles(map_folder)
     MapDecoration:place(map)
 
@@ -70,6 +70,8 @@ function game_manager:start_game()
 
     UnitMovement.map = map
     self.Playing = true
+
+    check_for_win()
 end
 
 function game_manager:end_game()
