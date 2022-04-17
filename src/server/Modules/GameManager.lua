@@ -11,6 +11,7 @@ local MapGeneration = require(Modules.MapGeneration)
 local MapDecoration = require(Modules.MapDecoration)
 local UnitGeneration = require(Modules.UnitGeneration)
 local UnitMovement = require(Modules.UnitMovement)
+local EnemyMovement = require(Modules.EnemyMovement)
 
 local game_manager = {}
 
@@ -38,6 +39,7 @@ function check_for_win() --> (bool)
     local Units = workspace.Units
     local enemy_count = #Units.Enemy:GetChildren()
     local player_count = #Units.Player:GetChildren()
+    print(enemy_count, player_count)
     if enemy_count == 0 or player_count == 0 then
         return true
     end
@@ -46,6 +48,12 @@ end
 
 function enemy_move()
     task.wait(math.random(1, 5))
+    print(check_for_win())
+    if check_for_win() then
+        game_manager:end_game()
+        return
+    end
+    EnemyMovement:Run(map)
     game_manager:change_turn()
 end
 

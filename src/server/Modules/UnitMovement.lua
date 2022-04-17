@@ -13,6 +13,8 @@ end
 
 function check_range(unit: table, position: Vector3)
     local range = unit.Model:FindFirstChild("Unit States").Range.Value
+
+    print("Run")
     
     for x = position.X - range, position.X + range do
         for z = position.Z - range, position.Z + range do
@@ -21,18 +23,18 @@ function check_range(unit: table, position: Vector3)
                 local old_pos = unit.Position
                 local old_tile = get_tile(old_pos.X, old_pos.Z)
                 if new_tile.Unit then
-                    if new_tile.Unit.Owner == "Enemy" then
-                        print("Attack")
+                    if new_tile.Unit.Owner ~= unit.Owner then
+                        --print("Attack")
                         local destroy = new_tile.Unit.Model
                         new_tile.Unit = unit
                         return true, destroy
-                    elseif new_tile.Unit.Owner == "Player" then
+                    elseif new_tile.Unit.Owner == unit.Owner then
                         -- unit can't attack own units
-                        print("Can't attack own units")
+                        --print("Can't attack own units")
                         return false
                     end
                 else
-                    print("Move")
+                    --print("Move")
                     old_tile.Unit = nil
                     new_tile.Unit = unit
                     return true
@@ -56,6 +58,7 @@ function unit_movement:move_unit(unit: table, position: Vector3)
                 destroy:Destroy()
             end
         end)
+        --humanoid.MoveToFinished:Wait()
     end
 
     return success
