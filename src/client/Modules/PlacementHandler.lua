@@ -40,6 +40,9 @@ Selected_Unit_Box.LineThickness = 0.1
 Selected_Unit_Box.Parent = workspace
 
 function get_tile(x, z)
+    if map == nil then
+        map = GetMap:InvokeServer()
+    end
     for _, tile in pairs(map.tiles) do
         if tile.x == x and tile.z == z then
             return tile
