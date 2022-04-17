@@ -63,18 +63,18 @@ function map_decoration:place(map: Map)
             tile_instance:FindFirstChildOfClass("Texture"):Destroy()
         elseif terrain_type == Terrain_Type.Forest then
             -- Add forest decoration
-            tile_instance.BrickColor = BrickColor.new("Earth green")
+            tile_instance.Color = Color3.new(0.247058, 0.560784, 0.266666)
             if math.random(1, 100) <= FOREST_CHANCE then
                 decoration = Assets:FindFirstChild("Forest_Decoration"):Clone()
             end
         elseif terrain_type == Terrain_Type.Mountain then
             -- Add mountain decoration
-            tile_instance.BrickColor = BrickColor.new("Dark stone grey")
+            tile_instance.Color = Color3.fromRGB(159, 128, 82)
             if math.random(1, 100) <= MOUNTAIN_CHANCE then
                 decoration = Assets:FindFirstChild("Mountain_Decoration"):Clone()
             end
         elseif terrain_type == Terrain_Type.GrassLand then
-            tile_instance.BrickColor = BrickColor.new("Sea green")
+            tile_instance.Color = Color3.new(0.572549, 0.925490, 0.533333)
             if math.random(1, 100) <= FOREST_CHANCE then
                 decoration = Assets:FindFirstChild("Shed"):Clone()
             end

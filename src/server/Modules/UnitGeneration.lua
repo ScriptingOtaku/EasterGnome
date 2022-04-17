@@ -56,8 +56,8 @@ get_tile: (x: number, y: number) -> Tile,
 
 local Units_to_Spawn: Unit = {}
 local Unit_Colours = {
-    Enemy = Color3.fromRGB(123, 0, 0),
-    Player = Color3.fromRGB(0, 123, 0),
+    Enemy = Color3.fromRGB(120, 20, 20),
+    Player = Color3.fromRGB(174, 243, 174),
 }
 
 local unit_folder = workspace:FindFirstChild("Units") or Instance.new("Folder")

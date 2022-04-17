@@ -30,6 +30,7 @@ function check_range(unit: table, position: Vector3)
                         task.spawn(function()
                             local explosion = Instance.new("Explosion")
                             explosion.Position = destroy:GetPivot().Position
+                            explosion.BlastRadius = .5
                             explosion.Parent = workspace
                             task.wait(1)
                             explosion:Destroy()
