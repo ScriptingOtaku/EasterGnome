@@ -2,7 +2,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Modules = script.Parent.Modules
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
-local Start_Game = Remotes:WaitForChild("Function_StartGame")
+local Start_Game = Remotes:WaitForChild("Event_StartGame")
 
 local GameManager = require(Modules.GameManager)
 
@@ -13,8 +13,6 @@ local function run()
     end
 end
 
-Start_Game.OnServerInvoke = function(_player: Player)
+Start_Game.OnServerEvent:Connect(function(_player: Player)
     run()
-end
-
-run()
+end)

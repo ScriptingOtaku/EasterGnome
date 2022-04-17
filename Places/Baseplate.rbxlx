@@ -80,27 +80,27 @@
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>-8.77144051</X>
-					<Y>2.13337278</Y>
-					<Z>49.4305267</Z>
-					<R00>-0.508325994</R00>
-					<R01>-0.21776019</R01>
-					<R02>0.833177865</R02>
-					<R10>-7.45057971e-09</R10>
-					<R11>0.967501163</R11>
-					<R12>0.252867043</R12>
-					<R20>-0.861164749</R20>
-					<R21>0.128538892</R21>
-					<R22>-0.491805911</R22>
+					<X>22.6703968</X>
+					<Y>29.0862503</Y>
+					<Z>81.8007278</Z>
+					<R00>0.207869291</R00>
+					<R01>-0.554739356</R01>
+					<R02>0.805639386</R02>
+					<R10>7.4505806e-09</R10>
+					<R11>0.823630333</R11>
+					<R12>0.567127287</R12>
+					<R20>-0.978156686</R20>
+					<R21>-0.117888339</R21>
+					<R22>0.171207443</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>-10.4377966</X>
-					<Y>1.62763858</Y>
-					<Z>50.4141388</Z>
+					<X>21.0591183</X>
+					<Y>27.9519958</Y>
+					<Z>81.458313</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -23885,12 +23885,18 @@ function Click(_name: string, state: Enum.UserInputState, _input: Enum.UserInput
                     local pos = Selected_Tile.Position
                     if tile_unit(pos) then
                         if tile_unit(pos).Owner == "Enemy" then
-                            print("attack")
-                            move_unit(Selected_Unit, pos)
+                            --print("attack")
+                            if move_unit(Selected_Unit, pos) then
+                                hide_unit_range()
+                                Selected_Unit = nil
+                            end
                         end
                     else
-                        print("move")
-                        move_unit(Selected_Unit, pos)
+                        --print("move")
+                        if move_unit(Selected_Unit, pos) then
+                            hide_unit_range()
+                            Selected_Unit = nil
+                        end
                     end
                     hide_unit_range()
                     Selected_Unit = nil
@@ -24170,22 +24176,55 @@ local MapGeneration = require(Modules.MapGeneration)
 local MapDecoration = require(Modules.MapDecoration)
 local UnitGeneration = require(Modules.UnitGeneration)
 local UnitMovement = require(Modules.UnitMovement)
+local EnemyMovement = require(Modules.EnemyMovement)
 
 local game_manager = {}
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
-local GetMap = Remotes:WaitForChild("Function_GetMap")
-local MoveUnit = Remotes:WaitForChild("Function_MoveUnit")
+local Get_Map = Remotes:WaitForChild("Function_GetMap")
+local Move_Unit = Remotes:WaitForChild("Function_MoveUnit")
 
 local map_folder = workspace:FindFirstChild("Map") or Instance.new("Folder")
 map_folder.Name = "Map"
 map_folder.Parent = workspace
 
+local turn_value = Instance.new("BoolValue")
+turn_value.Name = "Turn"
+turn_value.Parent = ReplicatedStorage
+turn_value.Value = true
+
 local map = nil
 
-function game_manager:start_game(_player: Player) 
+game_manager.Playing = false
+game_manager.Turn = true -- false = enemy, true = player
+
+game_manager.End = Instance.new("BindableEvent")
+
+function check_for_win() --> (bool)
+    local Units = workspace.Units
+    local enemy_count = #Units.Enemy:GetChildren()
+    local player_count = #Units.Player:GetChildren()
+    if enemy_count == 0 or player_count == 0 then
+        return true
+    end
+    return false
+end
+
+function enemy_move()
+    task.wait(math.random(1, 5))
+    if check_for_win() then
+        game_manager:end_game()
+        return
+    end
+    EnemyMovement:Run(map)
+    game_manager:change_turn()
+end
+
+function game_manager:start_game() 
     -- start single player game
-    map = MapGeneration:create_map()
+    map = MapGeneration:create_map({
+        seed = Random.new():NextNumber(0, 10e6)
+    })
     map.place_tiles(map_folder)
     MapDecoration:place(map)
 
@@ -24195,15 +24234,41 @@ function game_manager:start_game(_player: Player)
     UnitGeneration:generate(map)
 
     UnitMovement.map = map
+    self.Playing = true
+
+    check_for_win()
 end
 
-GetMap.OnServerInvoke = function(_player)
+function game_manager:end_game()
+    self.Playing = false
+    self.Turn = true
+    self.End:Fire()
+    map.Destroy()
+    map = nil
+end
+
+function game_manager:change_turn()
+    self.Turn = not self.Turn
+    turn_value.Value = self.Turn
+    if check_for_win() then
+        self:end_game()
+    end
+end
+
+Get_Map.OnServerInvoke = function(_player)
     return map or nil
 end
 
-MoveUnit.OnServerInvoke = function(_player, unit, position)
-    local success = UnitMovement:move_unit(unit, position)
-    return success
+Move_Unit.OnServerInvoke = function(_player, unit, position)
+    if game_manager.Turn == true then
+        game_manager:change_turn()
+        local success = UnitMovement:move_unit(unit, position)
+        enemy_move()
+        return success
+    else
+        --Not player's turn
+        return false
+    end
 end
 
 return game_manager]]></ProtectedString>
@@ -24427,6 +24492,23 @@ function generation:create_map(map_def: Map_Def) --> Map
         map.wall_instances = generate_walls(map, parent)
         map.tile_instances = tile_instances
     end
+    map.Destroy = function()
+        for _, tile in pairs(map.tile_instances) do
+            tile:Destroy()
+        end
+        for _, wall in pairs(map.wall_instances) do
+            wall:Destroy()
+        end
+        for _, unit in pairs(workspace.Units:GetDescendants()) do
+            if not unit:IsA("Folder") then
+                unit:Destroy()
+            end
+        end
+        for _, _v in pairs(map) do
+            _v = nil
+        end
+        map = nil
+    end
 
     return map
 end
@@ -24596,6 +24678,8 @@ function unit_generation:generate(map: Map) --> [Unit]
     local tiles: Tile = map.tiles
     local tile_instances: Instance = map.tile_instances
 
+    print("Generating units...")
+
     for _, tile in pairs(tiles) do
         local tile_instance: Instance = tile_instances[tile]
         if tile.TerrainType ~= Terrain_Type.Sea then 
@@ -24611,6 +24695,7 @@ function unit_generation:generate(map: Map) --> [Unit]
             end
         end
     end
+    units_added = {}
 
     return units_added
 end
@@ -24744,6 +24829,8 @@ end
 
 function check_range(unit: table, position: Vector3)
     local range = unit.Model:FindFirstChild("Unit States").Range.Value
+
+    print("Run")
     
     for x = position.X - range, position.X + range do
         for z = position.Z - range, position.Z + range do
@@ -24752,18 +24839,18 @@ function check_range(unit: table, position: Vector3)
                 local old_pos = unit.Position
                 local old_tile = get_tile(old_pos.X, old_pos.Z)
                 if new_tile.Unit then
-                    if new_tile.Unit.Owner == "Enemy" then
-                        print("Attack")
+                    if new_tile.Unit.Owner ~= unit.Owner then
+                        --print("Attack")
                         local destroy = new_tile.Unit.Model
                         new_tile.Unit = unit
                         return true, destroy
-                    elseif new_tile.Unit.Owner == "Player" then
+                    elseif new_tile.Unit.Owner == unit.Owner then
                         -- unit can't attack own units
-                        print("Can't attack own units")
+                        --print("Can't attack own units")
                         return false
                     end
                 else
-                    print("Move")
+                    --print("Move")
                     old_tile.Unit = nil
                     new_tile.Unit = unit
                     return true
@@ -24787,6 +24874,7 @@ function unit_movement:move_unit(unit: table, position: Vector3)
                 destroy:Destroy()
             end
         end)
+        --humanoid.MoveToFinished:Wait()
     end
 
     return success
@@ -24798,24 +24886,101 @@ return unit_movement]]></ProtectedString>
 					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d058be8e6</UniqueId>
 				</Properties>
 			</Item>
+			<Item class="ModuleScript" referent="RBXD3A502895578414298919F72477B8591">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">EnemyMovement</string>
+					<string name="ScriptGuid">{6B412904-C8EA-4D59-AF58-0C53A38B30DE}</string>
+					<ProtectedString name="Source"><![CDATA[local Modules = script.Parent
+local UnitMovement = require(Modules.UnitMovement)
+
+local enemy_movement = {}
+
+local function get_random_unit(tiles: table)
+    local units = {}
+    for _, tile in pairs(tiles) do
+        if tile.Unit then
+            if tile.Unit.Owner == "Enemy" then
+                table.insert(units, tile.Unit)
+            end
+        end
+    end
+    return units[math.random(1, #units)]
+end
+
+function get_tile(map, x, z)
+    for _, tile in pairs(map.tiles) do
+        if tile.x == x and tile.z == z then
+            return tile
+        end
+    end
+end
+
+local function get_tiles_in_range(map: table, unit: table) --> [Tile]
+    local range = unit.Model:FindFirstChild("Unit States").Range.Value
+    local tiles_in_range = {}
+    local position = unit.Position
+    
+    for x = position.X - range, position.X + range do
+        for z = position.Z - range, position.Z + range do
+            local tile = get_tile(map, x, z)
+            if tile then
+                table.insert(tiles_in_range, tile)
+            end
+        end
+    end
+    return tiles_in_range
+end
+
+function enemy_movement:Run(map: table)
+    local Unit = get_random_unit(map.tiles)
+    local Tiles = get_tiles_in_range(map, Unit)
+    local Target = Tiles[math.random(1, #Tiles)]
+    UnitMovement:move_unit(Unit, Vector3.new(
+        Target.x,
+        Unit.Position.Y,
+        Target.z
+    ))
+end
+
+return enemy_movement]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d06de6a91</UniqueId>
+				</Properties>
+			</Item>
 		</Item>
-		<Item class="Script" referent="RBX91C633715FAC4FEA95A5D9B8BEF09629">
+		<Item class="Script" referent="RBXBC88189B408C48BE8394DB532750926D">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">test</string>
-				<string name="ScriptGuid">{50FFB28C-CACF-4926-AA20-9B096D18B4FF}</string>
-				<ProtectedString name="Source"><![CDATA[local Modules = script.Parent.Modules
+				<string name="Name">run_game</string>
+				<string name="ScriptGuid">{2DD44E53-5505-4E82-89A1-E4907C88348B}</string>
+				<ProtectedString name="Source"><![CDATA[local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Modules = script.Parent.Modules
+
+local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+local Start_Game = Remotes:WaitForChild("Function_StartGame")
 
 local GameManager = require(Modules.GameManager)
 
-task.wait(1)
+local function run()
+    while task.wait() do
+        GameManager:start_game()
+        GameManager.End.Event:Wait()
+    end
+end
 
-GameManager:start_game(nil)]]></ProtectedString>
+Start_Game.OnServerInvoke = function(_player: Player)
+    run()
+end
+
+run()]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
-				<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d000b56aa</UniqueId>
+				<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d0689aa07</UniqueId>
 			</Properties>
 		</Item>
 	</Item>
@@ -46619,7 +46784,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -46714,7 +46879,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -46809,7 +46974,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -46904,7 +47069,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -46999,7 +47164,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47094,7 +47259,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47189,7 +47354,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47284,7 +47449,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47380,7 +47545,7 @@ end]]></ProtectedString>
 								<R21>-1</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -47522,7 +47687,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47617,7 +47782,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47712,7 +47877,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47807,7 +47972,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47902,7 +48067,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -47997,7 +48162,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48092,7 +48257,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48187,7 +48352,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48283,7 +48448,7 @@ end]]></ProtectedString>
 								<R21>-1</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -48425,7 +48590,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48520,7 +48685,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48615,7 +48780,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48710,7 +48875,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48805,7 +48970,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48900,7 +49065,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -48995,7 +49160,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -49090,7 +49255,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -49186,7 +49351,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -49281,7 +49446,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -49424,7 +49589,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -49566,7 +49731,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -49661,7 +49826,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -49756,7 +49921,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -49851,7 +50016,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -49946,7 +50111,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50041,7 +50206,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50136,7 +50301,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50231,7 +50396,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50327,7 +50492,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -50469,7 +50634,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50564,7 +50729,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50659,7 +50824,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50754,7 +50919,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50849,7 +51014,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -50944,7 +51109,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -51039,7 +51204,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -51134,7 +51299,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -51230,7 +51395,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -51325,7 +51490,7 @@ end]]></ProtectedString>
 								<R21>1</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -51420,7 +51585,7 @@ end]]></ProtectedString>
 								<R21>1</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -51564,7 +51729,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>-1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -51674,7 +51839,7 @@ end]]></ProtectedString>
 								<R21>0.707106829</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -51784,7 +51949,7 @@ end]]></ProtectedString>
 								<R21>0.707106829</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -51894,7 +52059,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>-1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -52050,7 +52215,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52145,7 +52310,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52240,7 +52405,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52335,7 +52500,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52430,7 +52595,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52525,7 +52690,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52620,7 +52785,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52715,7 +52880,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52858,7 +53023,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -52953,7 +53118,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53048,7 +53213,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53143,7 +53308,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53238,7 +53403,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53333,7 +53498,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53428,7 +53593,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53523,7 +53688,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53666,7 +53831,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53761,7 +53926,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53856,7 +54021,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -53951,7 +54116,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54046,7 +54211,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54141,7 +54306,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54236,7 +54401,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54331,7 +54496,7 @@ end]]></ProtectedString>
 									<R21>0.707106829</R21>
 									<R22>0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54474,7 +54639,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54569,7 +54734,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54664,7 +54829,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54759,7 +54924,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54854,7 +55019,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -54949,7 +55114,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55044,7 +55209,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55139,7 +55304,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55282,7 +55447,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55377,7 +55542,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55472,7 +55637,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55567,7 +55732,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55662,7 +55827,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55757,7 +55922,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55852,7 +56017,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -55947,7 +56112,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56090,7 +56255,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56185,7 +56350,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56280,7 +56445,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56375,7 +56540,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56470,7 +56635,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56565,7 +56730,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56660,7 +56825,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56755,7 +56920,7 @@ end]]></ProtectedString>
 									<R21>-0.707106829</R21>
 									<R22>-0.707106829</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -56851,7 +57016,7 @@ end]]></ProtectedString>
 								<R21>0.707106829</R21>
 								<R22>-0.707106829</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -56946,7 +57111,7 @@ end]]></ProtectedString>
 								<R21>0.707106829</R21>
 								<R22>-0.707106829</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -57089,7 +57254,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -57231,7 +57396,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -57326,7 +57491,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -57421,7 +57586,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -57516,7 +57681,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -57611,7 +57776,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -57706,7 +57871,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -57801,7 +57966,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -57896,7 +58061,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58039,7 +58204,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58134,7 +58299,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58229,7 +58394,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58324,7 +58489,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58419,7 +58584,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58514,7 +58679,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58609,7 +58774,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58704,7 +58869,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -58800,7 +58965,7 @@ end]]></ProtectedString>
 								<R21>1</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -58895,7 +59060,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -59085,7 +59250,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59180,7 +59345,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59275,7 +59440,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59370,7 +59535,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59465,7 +59630,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59560,7 +59725,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59655,7 +59820,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59750,7 +59915,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59893,7 +60058,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -59988,7 +60153,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60083,7 +60248,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60178,7 +60343,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60321,7 +60486,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60416,7 +60581,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60511,7 +60676,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60606,7 +60771,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60701,7 +60866,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60796,7 +60961,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60891,7 +61056,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -60986,7 +61151,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-1</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -61082,7 +61247,7 @@ end]]></ProtectedString>
 								<R21>1</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -61177,7 +61342,7 @@ end]]></ProtectedString>
 								<R21>1</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -61272,7 +61437,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>-1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -61367,7 +61532,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>-1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -61462,7 +61627,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>-1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -61605,7 +61770,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-0.866025388</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -61714,7 +61879,7 @@ end]]></ProtectedString>
 									<R21>-0.500000238</R21>
 									<R22>-0.866025388</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -61809,7 +61974,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-0.866025388</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -61904,7 +62069,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-0.866025388</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -61999,7 +62164,7 @@ end]]></ProtectedString>
 									<R21>-0.500000238</R21>
 									<R22>-0.866025388</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62094,7 +62259,7 @@ end]]></ProtectedString>
 									<R21>0.866025388</R21>
 									<R22>0.500000238</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62189,7 +62354,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0.258818984</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62284,7 +62449,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>-0.258818984</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62381,7 +62546,7 @@ end]]></ProtectedString>
 							<R21>0</R21>
 							<R22>0</R22>
 						</CoordinateFrame>
-						<bool name="CanCollide">true</bool>
+						<bool name="CanCollide">false</bool>
 						<bool name="CanQuery">true</bool>
 						<bool name="CanTouch">true</bool>
 						<bool name="CastShadow">true</bool>
@@ -62570,7 +62735,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62665,7 +62830,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62760,7 +62925,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62855,7 +63020,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -62950,7 +63115,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -63045,7 +63210,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -63140,7 +63305,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -63235,7 +63400,7 @@ end]]></ProtectedString>
 									<R21>0</R21>
 									<R22>0</R22>
 								</CoordinateFrame>
-								<bool name="CanCollide">true</bool>
+								<bool name="CanCollide">false</bool>
 								<bool name="CanQuery">true</bool>
 								<bool name="CanTouch">true</bool>
 								<bool name="CastShadow">true</bool>
@@ -63332,7 +63497,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>-1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -63442,7 +63607,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -63552,7 +63717,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>0</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -63662,7 +63827,7 @@ end]]></ProtectedString>
 								<R21>0</R21>
 								<R22>1</R22>
 							</CoordinateFrame>
-							<bool name="CanCollide">true</bool>
+							<bool name="CanCollide">false</bool>
 							<bool name="CanQuery">true</bool>
 							<bool name="CanTouch">true</bool>
 							<bool name="CastShadow">true</bool>
@@ -63773,7 +63938,7 @@ end]]></ProtectedString>
 							<R21>1</R21>
 							<R22>0</R22>
 						</CoordinateFrame>
-						<bool name="CanCollide">true</bool>
+						<bool name="CanCollide">false</bool>
 						<bool name="CanQuery">true</bool>
 						<bool name="CanTouch">true</bool>
 						<bool name="CastShadow">true</bool>
@@ -63883,7 +64048,7 @@ end]]></ProtectedString>
 							<R21>1</R21>
 							<R22>0</R22>
 						</CoordinateFrame>
-						<bool name="CanCollide">true</bool>
+						<bool name="CanCollide">false</bool>
 						<bool name="CanQuery">true</bool>
 						<bool name="CanTouch">true</bool>
 						<bool name="CastShadow">true</bool>
@@ -63993,7 +64158,7 @@ end]]></ProtectedString>
 							<R21>0</R21>
 							<R22>-1</R22>
 						</CoordinateFrame>
-						<bool name="CanCollide">true</bool>
+						<bool name="CanCollide">false</bool>
 						<bool name="CanQuery">true</bool>
 						<bool name="CanTouch">true</bool>
 						<bool name="CastShadow">true</bool>
@@ -68209,6 +68374,15 @@ end]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d058be8e8</UniqueId>
+				</Properties>
+			</Item>
+			<Item class="RemoteFunction" referent="RBXBF5C27AAC1B9471FAD65C5A0177F6793">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<string name="Name">Function_StartGame</string>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d0689aa0a</UniqueId>
 				</Properties>
 			</Item>
 		</Item>

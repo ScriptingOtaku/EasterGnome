@@ -5,31 +5,13 @@
     Responsible for handling the placement and any input on the game board.
 ]]
 
---[[
-    On hover over player unit, give info
-    On click on player unit, select unit to do action
-        * Move
-        * Attack
-        * Collect resources
-]]
-
---[[
-    x - When mouse is over a tile with a player unit, show the unit's info
-    x - When mouse selected a tile with a player unit, highlight tiles where the unit can reach
-    
-    When clicked on a tile, move the unit to that tile
-    When clicked on a unit, attack the unit
-    When clicked on a resource, collect the resource
-]]
-
 local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
-local Packages = ReplicatedStorage:WaitForChild("Packages")
-local Roact = require(Packages:WaitForChild("Roact"))
+local UserInterface = require(script.Parent.UserInterface)
 
 local placement_handler = {}
 
@@ -106,15 +88,15 @@ function move_unit(unit: table, pos: Vector3)
     map = GetMap:InvokeServer()
 end
 
-function show_unit_info(unit: Unit)
+function show_unit_info(unit: table)
     if unit_info ~= unit and unit.Owner == "Player" then
-        print("Show unit info")
+        UserInterface.show_unit_info(unit)
         unit_info = unit
     end
 end
 
 function hide_unit_info()
-    print("Hide unit info")
+    UserInterface.hide_unit_info()
     unit_info = nil
 end
 
