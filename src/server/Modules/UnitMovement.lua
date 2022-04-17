@@ -27,6 +27,13 @@ function check_range(unit: table, position: Vector3)
                         --print("Attack")
                         local destroy = new_tile.Unit.Model
                         new_tile.Unit = unit
+                        task.spawn(function()
+                            local explosion = Instance.new("Explosion")
+                            explosion.Position = destroy:GetPivot().Position
+                            explosion.Parent = workspace
+                            task.wait(1)
+                            explosion:Destroy()
+                        end)
                         return true, destroy
                     elseif new_tile.Unit.Owner == unit.Owner then
                         -- unit can't attack own units
