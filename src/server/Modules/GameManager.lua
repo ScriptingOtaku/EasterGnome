@@ -32,6 +32,18 @@ local map = nil
 game_manager.Playing = false
 game_manager.Turn = true -- false = enemy, true = player
 
+game_manager.End = Instance.new("BindableEvent")
+
+function check_for_win() --> (bool)
+    local Units = workspace.Units
+    local enemy_count = #Units.Enemy:GetChildren()
+    local player_count = #Units.Player:GetChildren()
+    if enemy_count == 0 or player_count == 0 then
+        return true
+    end
+    return false
+end
+
 function game_manager:start_game(_player: Player) 
     -- start single player game
     map = MapGeneration:create_map()
@@ -47,9 +59,19 @@ function game_manager:start_game(_player: Player)
     self.Playing = true
 end
 
+function game_manager:end_game()
+    self.Playing = false
+    self.Turn = true
+    self.End.Event:Fire()
+    map = nil
+end
+
 function game_manager:change_turn()
     self.Turn = not self.Turn
     turn_value.Value = self.Turn
+    if check_for_win() then
+        self:end_game()
+    end
 end
 
 Get_Map.OnServerInvoke = function(_player)
