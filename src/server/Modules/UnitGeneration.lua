@@ -10,9 +10,14 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local unit_generation = {}
 
 local Units: Unit = {
-    Soldier = "Soldier",
-    Tank = "Tank",
-    Ambulance = "Ambulance",
+    Flower = "Flower",
+    Sprout = "Sprout",
+    Twig = "Twig",
+}
+local Unit_Ranges: table = {
+    Flower = 16,
+    Sprout = 8,
+    Twig = 4,
 }
 unit_generation.Units = Units
 type Unit = {
@@ -90,29 +95,18 @@ end
 function create_states(_unit_type: string) --> Folder
     local Folder = Instance.new("Folder")
     Folder.Name = "Unit States"
-    local Health = Instance.new("NumberValue")
-    Health.Name = "Health"
-    Health.Value = 100
-    Health.Parent = Folder
-    local Energy = Instance.new("NumberValue")
-    Energy.Name = "Energy"
-    Energy.Value = 100
-    Energy.Parent = Folder
     local Range = Instance.new("NumberValue")
     Range.Name = "Range"
-    Range.Value = 8
+    Range.Value = Unit_Ranges[_unit_type]
     Range.Parent = Folder
     return Folder
 end
 
 function colour_unit(unit_model: Instance, owner: string) --> Void
     local unit_colour = Unit_Colours[owner]
-    local config = unit_model:FindFirstChild("Colours")
-    if config then
-        for _, value in pairs(config:GetChildren()) do
-            if value.Value then
-                value.Value.Color = unit_colour
-            end
+    for _, part in pairs(unit_model:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.Color = unit_colour
         end
     end
 end

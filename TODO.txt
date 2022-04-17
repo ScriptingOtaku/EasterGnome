@@ -1,12 +1,12 @@
 TODO:
 
 // Camera: Fit the camera to game board
-Simple Interface
+// Simple Interface
 // Player Units
 // Enemy Units
 // Unit Fights
-Good Terrain
-Resource Collection
+x - Good Terrain
+x - Resource Collection
 Story (Short)
 
 Backlog:

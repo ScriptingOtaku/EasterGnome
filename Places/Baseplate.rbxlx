@@ -80,27 +80,27 @@
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>22.6703968</X>
-					<Y>29.0862503</Y>
-					<Z>81.8007278</Z>
-					<R00>0.207869291</R00>
-					<R01>-0.554739356</R01>
-					<R02>0.805639386</R02>
-					<R10>7.4505806e-09</R10>
-					<R11>0.823630333</R11>
-					<R12>0.567127287</R12>
-					<R20>-0.978156686</R20>
-					<R21>-0.117888339</R21>
-					<R22>0.171207443</R22>
+					<X>-5.98082638</X>
+					<Y>14.620575</Y>
+					<Z>44.9514656</Z>
+					<R00>-0.994700909</R00>
+					<R01>0.0303584002</R01>
+					<R02>-0.0982274637</R02>
+					<R10>-1.86264515e-09</R10>
+					<R11>0.95541048</R11>
+					<R12>0.295281291</R12>
+					<R20>0.102811806</R20>
+					<R21>0.29371658</R21>
+					<R22>-0.950347543</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>21.0591183</X>
-					<Y>27.9519958</Y>
-					<Z>81.458313</Z>
+					<X>-5.78437138</X>
+					<Y>14.0300121</Y>
+					<Z>46.8521614</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -19853,6 +19853,46 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d02c1f291</UniqueId>
 						</Properties>
 					</Item>
+					<Item class="Weld" referent="RBXEEB1C1CBE1A844878106AE314F8A5FE9">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<CoordinateFrame name="C0">
+								<X>0</X>
+								<Y>0.5</Y>
+								<Z>0</Z>
+								<R00>1</R00>
+								<R01>0</R01>
+								<R02>0</R02>
+								<R10>0</R10>
+								<R11>1</R11>
+								<R12>0</R12>
+								<R20>0</R20>
+								<R21>0</R21>
+								<R22>1</R22>
+							</CoordinateFrame>
+							<CoordinateFrame name="C1">
+								<X>0</X>
+								<Y>0</Y>
+								<Z>-0.109999999</Z>
+								<R00>1</R00>
+								<R01>0</R01>
+								<R02>0</R02>
+								<R10>0</R10>
+								<R11>1</R11>
+								<R12>0</R12>
+								<R20>0</R20>
+								<R21>0</R21>
+								<R22>1</R22>
+							</CoordinateFrame>
+							<bool name="Enabled">true</bool>
+							<string name="Name">HeadWeld</string>
+							<Ref name="Part0">RBX0342E899E00D46BDBE9F22EDF8DAC077</Ref>
+							<Ref name="Part1">RBX55C5FF420D5A46188C7DBC345307689B</Ref>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">5f78881bba3fb429026d20730001b5d6</UniqueId>
+						</Properties>
+					</Item>
 				</Item>
 				<Item class="Humanoid" referent="RBX3F1093B337A3487EA908645707C8AEC4">
 					<Properties>
@@ -21184,6 +21224,46 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<int64 name="SourceAssetId">-1</int64>
 							<BinaryString name="Tags"></BinaryString>
 							<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d02c203f6</UniqueId>
+						</Properties>
+					</Item>
+					<Item class="Weld" referent="RBX6095DCB9661F4CB3B94A32BA1BC4856B">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<CoordinateFrame name="C0">
+								<X>0</X>
+								<Y>0.5</Y>
+								<Z>0</Z>
+								<R00>1</R00>
+								<R01>0</R01>
+								<R02>0</R02>
+								<R10>0</R10>
+								<R11>1</R11>
+								<R12>0</R12>
+								<R20>0</R20>
+								<R21>0</R21>
+								<R22>1</R22>
+							</CoordinateFrame>
+							<CoordinateFrame name="C1">
+								<X>0</X>
+								<Y>0</Y>
+								<Z>-0.109999999</Z>
+								<R00>1</R00>
+								<R01>0</R01>
+								<R02>0</R02>
+								<R10>0</R10>
+								<R11>1</R11>
+								<R12>0</R12>
+								<R20>0</R20>
+								<R21>0</R21>
+								<R22>1</R22>
+							</CoordinateFrame>
+							<bool name="Enabled">true</bool>
+							<string name="Name">HeadWeld</string>
+							<Ref name="Part0">RBX81F205C9333A4DEEBE5227A0FC34EC14</Ref>
+							<Ref name="Part1">RBX9237423CF8304B8C8937E98DEBBA5467</Ref>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">5f78881bba3fb429026d20730001b5d9</UniqueId>
 						</Properties>
 					</Item>
 				</Item>
@@ -22519,6 +22599,46 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 							<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d02c2052e</UniqueId>
 						</Properties>
 					</Item>
+					<Item class="Weld" referent="RBX3EC206FC8FD44CB79BA114908D35E95C">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<CoordinateFrame name="C0">
+								<X>0</X>
+								<Y>0.5</Y>
+								<Z>0</Z>
+								<R00>1</R00>
+								<R01>0</R01>
+								<R02>0</R02>
+								<R10>0</R10>
+								<R11>1</R11>
+								<R12>0</R12>
+								<R20>0</R20>
+								<R21>0</R21>
+								<R22>1</R22>
+							</CoordinateFrame>
+							<CoordinateFrame name="C1">
+								<X>0</X>
+								<Y>0</Y>
+								<Z>-0.109999999</Z>
+								<R00>1</R00>
+								<R01>0</R01>
+								<R02>0</R02>
+								<R10>0</R10>
+								<R11>1</R11>
+								<R12>0</R12>
+								<R20>0</R20>
+								<R21>0</R21>
+								<R22>1</R22>
+							</CoordinateFrame>
+							<bool name="Enabled">true</bool>
+							<string name="Name">HeadWeld</string>
+							<Ref name="Part0">RBX4D5F626D56D64D1486C66CBF033E3486</Ref>
+							<Ref name="Part1">RBXE1352457095948ED822C0F2625FAC7C2</Ref>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">5f78881bba3fb429026d20730001b5dc</UniqueId>
+						</Properties>
+					</Item>
 				</Item>
 				<Item class="Humanoid" referent="RBX1AF37A2165F54D91889606D10E609DDA">
 					<Properties>
@@ -23728,31 +23848,13 @@ return camera_handler]]></ProtectedString>
     Responsible for handling the placement and any input on the game board.
 ]]
 
---[[
-    On hover over player unit, give info
-    On click on player unit, select unit to do action
-        * Move
-        * Attack
-        * Collect resources
-]]
-
---[[
-    x - When mouse is over a tile with a player unit, show the unit's info
-    x - When mouse selected a tile with a player unit, highlight tiles where the unit can reach
-    
-    When clicked on a tile, move the unit to that tile
-    When clicked on a unit, attack the unit
-    When clicked on a resource, collect the resource
-]]
-
 local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
-local Packages = ReplicatedStorage:WaitForChild("Packages")
-local Roact = require(Packages:WaitForChild("Roact"))
+local UserInterface = require(script.Parent.UserInterface)
 
 local placement_handler = {}
 
@@ -23781,6 +23883,9 @@ Selected_Unit_Box.LineThickness = 0.1
 Selected_Unit_Box.Parent = workspace
 
 function get_tile(x, z)
+    if map == nil then
+        map = GetMap:InvokeServer()
+    end
     for _, tile in pairs(map.tiles) do
         if tile.x == x and tile.z == z then
             return tile
@@ -23829,15 +23934,15 @@ function move_unit(unit: table, pos: Vector3)
     map = GetMap:InvokeServer()
 end
 
-function show_unit_info(unit: Unit)
+function show_unit_info(unit: table)
     if unit_info ~= unit and unit.Owner == "Player" then
-        print("Show unit info")
+        UserInterface.show_unit_info(unit)
         unit_info = unit
     end
 end
 
 function hide_unit_info()
-    print("Hide unit info")
+    UserInterface.hide_unit_info()
     unit_info = nil
 end
 
@@ -23921,6 +24026,271 @@ return placement_handler]]></ProtectedString>
 						<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d000b569f</UniqueId>
 					</Properties>
 				</Item>
+				<Item class="ModuleScript" referent="RBX72583D3129CC41DFA80EADD8D255E57F">
+					<Properties>
+						<BinaryString name="AttributesSerialize"></BinaryString>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">UserInterface</string>
+						<string name="ScriptGuid">{CA2DB8BD-1134-408A-B9DE-D90307FA461C}</string>
+						<ProtectedString name="Source"><![CDATA[local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+
+local Packages = ReplicatedStorage:WaitForChild("Packages")
+local Roact = require(Packages:WaitForChild("Roact"))
+
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+
+local UserInterface = {}
+
+UserInterface.StartPlacement = Instance.new("BindableEvent")
+
+local unit_info_mount = nil
+local menu_mount = nil
+
+local button = require(script.Menu.Button)
+
+function UserInterface.show_menu()
+    if menu_mount then
+        UserInterface.hide_menu()
+    end
+    menu_mount = Roact.mount(
+        Roact.createElement("ScreenGui", {
+            IgnoreGuiInset = true,
+        }, {
+            Roact.createElement("UIAspectRatioConstraint", {
+                AspectRatio = 1.777,
+                AspectType = Enum.AspectType.FitWithinMaxSize,
+                DominantAxis = Enum.DominantAxis.Width,
+            }),
+            BattleMenu = Roact.createElement("Frame", {
+                AnchorPoint = Vector2.new(0.5, 0.5),
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                BorderSizePixel = 0,
+                Position = UDim2.new(0.5, 0, 0.5, 0),
+                Size = UDim2.new(.3, 0, .3, 0),
+            }, {
+                Roact.createElement("UIStroke", {
+                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                    Color = Color3.fromRGB(255, 56, 56),
+                    Thickness = 5,
+                }),
+                Roact.createElement("Folder", {}, {
+                    Roact.createElement("UIListLayout", {
+                        Padding = UDim.new(0, 0),
+                        FillDirection = Enum.FillDirection.Vertical,
+                        HorizontalAlignment = Enum.HorizontalAlignment.Left,
+                        SortOrder = Enum.SortOrder.LayoutOrder,
+                        VerticalAlignment = Enum.VerticalAlignment.Top,
+                    }),
+                    Roact.createElement(button, {
+                        Use = "CAMPAIGN",
+                        Color = Color3.fromRGB(64, 64, 248),
+                        Interface = UserInterface,
+                        StartPlacement = UserInterface.StartPlacement,
+                    }),
+                    Roact.createElement(button, {
+                        Use = "COMBAT",
+                        Color = Color3.fromRGB(248, 40, 40),
+                    }),
+                    Roact.createElement(button, {
+                        Use = "TRAINING",
+                        Color = Color3.fromRGB(80, 160, 120),
+                    }),
+                }),
+                Roact.createElement("TextLabel", {
+                    AnchorPoint = Vector2.new(0.5, 1),
+                    BackgroundColor3 = Color3.fromRGB(255, 56, 56),
+                    Position = UDim2.new(0.5, 0, 0, 0),
+                    Size = UDim2.new(1.024, 0, 0.15, 0),
+                    Text = "BATTLE MENU",
+                    BorderSizePixel = 0,
+                    Font = Enum.Font.ArialBold,
+                    TextColor3 = Color3.fromRGB(255, 255, 255),
+                    TextScaled = true,
+                    ZIndex = 2
+                }, {
+                    Roact.createElement("UICorner", {
+                        CornerRadius = UDim.new(0, 8),
+                    }),
+                    Roact.createElement("UITextSizeConstraint", {
+                        MaxTextSize = 34,
+                        MinTextSize = 1,
+                    }),
+                    Roact.createElement("Frame", {
+                        AnchorPoint = Vector2.new(0.5, 1),
+                        BackgroundColor3 = Color3.fromRGB(255, 56, 56),
+                        BorderSizePixel = 0,
+                        Position = UDim2.new(0.5, 0, 1, 0),
+                        Size = UDim2.new(1, 0, 0.5, 0),
+                    })
+                })
+            })
+        }),
+        PlayerGui
+    )
+end
+
+function UserInterface.hide_menu()
+    Roact.unmount(menu_mount)
+end
+
+function UserInterface.show_unit_info(unit: table)
+    if unit_info_mount then
+        UserInterface.hide_unit_info()
+    end
+    unit_info_mount = Roact.mount(
+        Roact.createElement("ScreenGui", {}, {
+            Roact.createElement("UIAspectRatioConstraint", {
+                AspectRatio = 1.777,
+                AspectType = Enum.AspectType.FitWithinMaxSize,
+                DominantAxis = Enum.DominantAxis.Width,
+            }),
+            Roact.createElement("Frame", {
+                Position = UDim2.new(0, -100, 0.7, 0),
+                Size = UDim2.new(0.35, 0, 0.275, 0),
+                BackgroundTransparency = .6,
+                BackgroundColor3 = Color3.new(0, 0, 0),
+            }, {
+                Roact.createElement("UICorner", {
+                    CornerRadius = UDim.new(1, 0),
+                }),
+                Roact.createElement("TextLabel", {
+                    Text = unit.UnitName,
+                    TextScaled = true,
+                    TextColor3 = Color3.new(1, 1, 1),
+                    TextStrokeColor3 = Color3.new(0, 0, 0),
+                    TextStrokeTransparency = 0,
+                    Position = UDim2.new(0.5, 0, 0, 0),
+                    AnchorPoint = Vector2.new(0.5, 0),
+                    Size = UDim2.new(0.419, 0, 0.473, 0),
+                    BackgroundTransparency = 1,
+                }, {
+                    Roact.createElement("UITextSizeConstraint", {
+                        MaxTextSize = 83,
+                        MinTextSize = 1,
+                    })
+                }),
+                Roact.createElement("TextLabel", {
+                    Text = "Range: " .. unit.Model:FindFirstChild("Unit States").Range.Value,
+                    TextScaled = true,
+                    TextColor3 = Color3.new(1, 1, 1),
+                    TextStrokeColor3 = Color3.new(0, 0, 0),
+                    TextStrokeTransparency = 0,
+                    Position = UDim2.new(0.5, 0, 0.473, 0),
+                    AnchorPoint = Vector2.new(0.5, 0),
+                    Size = UDim2.new(0.419, 0, 0.237, 0),
+                    BackgroundTransparency = 1,
+                }, {
+                    Roact.createElement("UITextSizeConstraint", {
+                        MaxTextSize = 50,
+                        MinTextSize = 1,
+                    })
+                }),
+            })
+        }),
+        PlayerGui
+    )
+end
+
+function UserInterface.hide_unit_info()
+    if unit_info_mount then
+        Roact.unmount(unit_info_mount)
+        unit_info_mount = nil
+    end
+end
+
+
+return UserInterface]]></ProtectedString>
+						<int64 name="SourceAssetId">-1</int64>
+						<BinaryString name="Tags"></BinaryString>
+						<UniqueId name="UniqueId">5f78881bba3fb429026d2073000f7104</UniqueId>
+					</Properties>
+					<Item class="Folder" referent="RBX7B8074110F7F41A396F4B9DAF3714616">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<string name="Name">Interface</string>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">5f78881bba3fb429026d2073000f7105</UniqueId>
+						</Properties>
+					</Item>
+					<Item class="Folder" referent="RBX3A4AA7B936E542ABA7461F234F5FA2F8">
+						<Properties>
+							<BinaryString name="AttributesSerialize"></BinaryString>
+							<string name="Name">Menu</string>
+							<int64 name="SourceAssetId">-1</int64>
+							<BinaryString name="Tags"></BinaryString>
+							<UniqueId name="UniqueId">5f78881bba3fb429026d2073000f7106</UniqueId>
+						</Properties>
+						<Item class="ModuleScript" referent="RBXC5238C63D7044AB0AC5D710E1BB3E332">
+							<Properties>
+								<BinaryString name="AttributesSerialize"></BinaryString>
+								<Content name="LinkedSource"><null></null></Content>
+								<string name="Name">Button</string>
+								<string name="ScriptGuid">{310C8B18-F736-4204-9865-794FF608817F}</string>
+								<ProtectedString name="Source"><![CDATA[local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local Roact = require(ReplicatedStorage.Packages.Roact)
+
+local Remotes = ReplicatedStorage.Remotes
+local start_game = Remotes:WaitForChild("Event_StartGame")
+
+local Button = Roact.Component:extend("Button")
+
+function Button:init()
+    self:setState({
+        Use = self.props.Use,
+    })
+end
+
+function Button:render()
+    return Roact.createElement("TextButton", {
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+        BorderSizePixel = 0,
+        Text = self.state.Use,
+        TextColor3 = self.props.Color,
+        RichText = true,
+        Size = UDim2.new(1, 0, 0.333, 0),
+        TextScaled = true,
+        [Roact.Event.Activated] = function()
+            if self.props.Use ~= "CAMPAIGN" then
+                self:setState({
+                    Use = "UNIMPLEMENTED",
+                })
+                task.wait(1)
+                self:setState({
+                    Use = self.props.Use,
+                })
+            else
+                start_game:FireServer(self.props.Use)
+                self.props.Interface.hide_menu()
+                self.props.StartPlacement:Fire()
+            end
+        end
+    }, {
+        Roact.createElement("UITextSizeConstraint", {
+            MaxTextSize = 34,
+            MinTextSize = 1,
+        }),
+        Roact.createElement("Frame", {
+            BackgroundColor3 = self.props.Color,
+            BorderSizePixel = 0,
+            Size = UDim2.new(.95, 0, 0.1, 0),
+            Position = UDim2.new(0.5, 0, .975, 0),
+            AnchorPoint = Vector2.new(.5, 1),
+        })
+    })
+end
+
+return Button]]></ProtectedString>
+								<int64 name="SourceAssetId">-1</int64>
+								<BinaryString name="Tags"></BinaryString>
+								<UniqueId name="UniqueId">5f78881bba3fb429026d2073002e9151</UniqueId>
+							</Properties>
+						</Item>
+					</Item>
+				</Item>
 			</Item>
 			<Item class="LocalScript" referent="RBX35EBD97647D14378AB829FC1A75EDCAD">
 				<Properties>
@@ -23933,9 +24303,7 @@ return placement_handler]]></ProtectedString>
 
 local PlacementHandler = require(Modules.PlacementHandler)
 local CameraHandler = require(Modules.CameraHandler)
-
-PlacementHandler:start()
-
+local UserInterface = require(Modules.UserInterface)
 --[[
     12x8 = 22,50,14
 ]]
@@ -23943,7 +24311,12 @@ CameraHandler:start(
     Vector2.new(12, 8),
     4,
     Vector3.new(-60, 0, 0)
-)]]></ProtectedString>
+)
+
+UserInterface.show_menu()
+UserInterface.StartPlacement.Event:Connect(function()
+    PlacementHandler:start()
+end)]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d000b56ad</UniqueId>
@@ -24962,7 +25335,7 @@ return enemy_movement]]></ProtectedString>
 local Modules = script.Parent.Modules
 
 local Remotes = ReplicatedStorage:WaitForChild("Remotes")
-local Start_Game = Remotes:WaitForChild("Function_StartGame")
+local Start_Game = Remotes:WaitForChild("Event_StartGame")
 
 local GameManager = require(Modules.GameManager)
 
@@ -24973,11 +25346,9 @@ local function run()
     end
 end
 
-Start_Game.OnServerInvoke = function(_player: Player)
+Start_Game.OnServerEvent:Connect(function(_player: Player)
     run()
-end
-
-run()]]></ProtectedString>
+end)]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d0689aa07</UniqueId>
@@ -68376,13 +68747,13 @@ end]]></ProtectedString>
 					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d058be8e8</UniqueId>
 				</Properties>
 			</Item>
-			<Item class="RemoteFunction" referent="RBXBF5C27AAC1B9471FAD65C5A0177F6793">
+			<Item class="RemoteEvent" referent="RBXD27DD1CD5262451CA9CB64811367E046">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
-					<string name="Name">Function_StartGame</string>
+					<string name="Name">Event_StartGame</string>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
-					<UniqueId name="UniqueId">3cefc7ab37a4aaeb026c834d0689aa0a</UniqueId>
+					<UniqueId name="UniqueId">5f78881bba3fb429026d2073009b6c6b</UniqueId>
 				</Properties>
 			</Item>
 		</Item>
@@ -68408,9 +68779,9 @@ end]]></ProtectedString>
 	<Item class="Lighting" referent="RBXF983F4FF274D427FA89945DE595AE0BB">
 		<Properties>
 			<Color3 name="Ambient">
-				<R>0.274509817</R>
-				<G>0.274509817</G>
-				<B>0.274509817</B>
+				<R>0</R>
+				<G>0</G>
+				<B>0</B>
 			</Color3>
 			<BinaryString name="AttributesSerialize"></BinaryString>
 			<float name="Brightness">3</float>
@@ -68420,11 +68791,11 @@ end]]></ProtectedString>
 				<B>0</B>
 			</Color3>
 			<Color3 name="ColorShift_Top">
-				<R>0</R>
-				<G>0</G>
-				<B>0</B>
+				<R>1</R>
+				<G>0.752941251</G>
+				<B>0.572549045</B>
 			</Color3>
-			<float name="EnvironmentDiffuseScale">1</float>
+			<float name="EnvironmentDiffuseScale">0.222000003</float>
 			<float name="EnvironmentSpecularScale">1</float>
 			<float name="ExposureCompensation">0</float>
 			<Color3 name="FogColor">
@@ -68434,20 +68805,20 @@ end]]></ProtectedString>
 			</Color3>
 			<float name="FogEnd">100000</float>
 			<float name="FogStart">0</float>
-			<float name="GeographicLatitude">0</float>
+			<float name="GeographicLatitude">52.580265</float>
 			<bool name="GlobalShadows">true</bool>
 			<string name="Name">Lighting</string>
 			<Color3 name="OutdoorAmbient">
-				<R>0.274509817</R>
-				<G>0.274509817</G>
-				<B>0.274509817</B>
+				<R>0.254901975</R>
+				<G>0.282352954</G>
+				<B>0.207843155</B>
 			</Color3>
 			<bool name="Outlines">false</bool>
-			<float name="ShadowSoftness">0.200000003</float>
+			<float name="ShadowSoftness">0.150000006</float>
 			<int64 name="SourceAssetId">-1</int64>
 			<BinaryString name="Tags"></BinaryString>
 			<token name="Technology">3</token>
-			<string name="TimeOfDay">14:30:00</string>
+			<string name="TimeOfDay">07:47:34</string>
 			<UniqueId name="UniqueId">644b942114f29f93026bb5c30001b470</UniqueId>
 		</Properties>
 		<Item class="Sky" referent="RBX7B6C0ECA1F2E4650AF21CB97ECF492CA">
@@ -68531,6 +68902,27 @@ end]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">644b942114f29f93026bb5c30001b60d</UniqueId>
+			</Properties>
+		</Item>
+		<Item class="Sky" referent="RBX8073F38B3B794C218FE9ACB25728F047">
+			<Properties>
+				<BinaryString name="AttributesSerialize"></BinaryString>
+				<bool name="CelestialBodiesShown">true</bool>
+				<float name="MoonAngularSize">11</float>
+				<Content name="MoonTextureId"><url>rbxasset://sky/moon.jpg</url></Content>
+				<string name="Name">Clouded Sky</string>
+				<Content name="SkyboxBk"><url>http://www.roblox.com/asset/?id=252760981</url></Content>
+				<Content name="SkyboxDn"><url>http://www.roblox.com/asset/?id=252763035</url></Content>
+				<Content name="SkyboxFt"><url>http://www.roblox.com/asset/?id=252761439</url></Content>
+				<Content name="SkyboxLf"><url>http://www.roblox.com/asset/?id=252760980</url></Content>
+				<Content name="SkyboxRt"><url>http://www.roblox.com/asset/?id=252760986</url></Content>
+				<Content name="SkyboxUp"><url>http://www.roblox.com/asset/?id=252762652</url></Content>
+				<int64 name="SourceAssetId">-1</int64>
+				<int name="StarCount">3000</int>
+				<float name="SunAngularSize">11</float>
+				<Content name="SunTextureId"><url>rbxassetid://1345009717</url></Content>
+				<BinaryString name="Tags"></BinaryString>
+				<UniqueId name="UniqueId">5f78881bba3fb429026d2073000b6d9f</UniqueId>
 			</Properties>
 		</Item>
 	</Item>

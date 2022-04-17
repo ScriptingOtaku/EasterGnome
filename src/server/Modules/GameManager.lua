@@ -63,9 +63,9 @@ function game_manager:start_game()
     map.place_tiles(map_folder)
     MapDecoration:place(map)
 
-    UnitGeneration:add_to_generation(UnitGeneration.Units.Soldier, 50)
-    UnitGeneration:add_to_generation(UnitGeneration.Units.Tank, 25)
-    UnitGeneration:add_to_generation(UnitGeneration.Units.Ambulance, 25)
+    UnitGeneration:add_to_generation(UnitGeneration.Units.Twig, 50)
+    UnitGeneration:add_to_generation(UnitGeneration.Units.Sprout, 25)
+    UnitGeneration:add_to_generation(UnitGeneration.Units.Flower, 10)
     UnitGeneration:generate(map)
 
     UnitMovement.map = map
