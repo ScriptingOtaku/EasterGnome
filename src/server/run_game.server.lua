@@ -6,9 +6,15 @@ local Start_Game = Remotes:WaitForChild("Function_StartGame")
 
 local GameManager = require(Modules.GameManager)
 
-Start_Game.OnServerInvoke = function(player: Player)
+local function run()
     while task.wait() do
-        GameManager:start_game(player)
+        GameManager:start_game()
         GameManager.End.Event:Wait()
     end
 end
+
+Start_Game.OnServerInvoke = function(_player: Player)
+    run()
+end
+
+run()

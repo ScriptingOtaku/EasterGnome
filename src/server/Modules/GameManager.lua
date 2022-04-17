@@ -44,7 +44,12 @@ function check_for_win() --> (bool)
     return false
 end
 
-function game_manager:start_game(_player: Player) 
+function enemy_move()
+    task.wait(math.random(1, 5))
+    game_manager:change_turn()
+end
+
+function game_manager:start_game() 
     -- start single player game
     map = MapGeneration:create_map()
     map.place_tiles(map_folder)
@@ -62,7 +67,8 @@ end
 function game_manager:end_game()
     self.Playing = false
     self.Turn = true
-    self.End.Event:Fire()
+    self.End:Fire()
+    map.Destroy()
     map = nil
 end
 
@@ -82,6 +88,7 @@ Move_Unit.OnServerInvoke = function(_player, unit, position)
     if game_manager.Turn == true then
         game_manager:change_turn()
         local success = UnitMovement:move_unit(unit, position)
+        enemy_move()
         return success
     else
         --Not player's turn

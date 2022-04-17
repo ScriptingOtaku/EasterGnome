@@ -207,6 +207,18 @@ function generation:create_map(map_def: Map_Def) --> Map
         map.wall_instances = generate_walls(map, parent)
         map.tile_instances = tile_instances
     end
+    map.Destroy = function()
+        for _, tile in pairs(map.tile_instances) do
+            tile:Destroy()
+        end
+        for _, wall in pairs(map.wall_instances) do
+            wall:Destroy()
+        end
+        for _, _v in pairs(map) do
+            _v = nil
+        end
+        map = nil
+    end
 
     return map
 end
