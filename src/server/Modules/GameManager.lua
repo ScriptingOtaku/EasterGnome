@@ -99,9 +99,11 @@ end
 
 Move_Unit.OnServerInvoke = function(_player, unit, position)
     if game_manager.Turn == true then
-        game_manager:change_turn()
         local success = UnitMovement:move_unit(unit, position)
-        enemy_move()
+        if success then
+            enemy_move()
+            game_manager:change_turn()
+        end
         return success
     else
         --Not player's turn
