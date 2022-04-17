@@ -163,11 +163,17 @@ function Click(_name: string, state: Enum.UserInputState, _input: Enum.UserInput
                     if tile_unit(pos) then
                         if tile_unit(pos).Owner == "Enemy" then
                             --print("attack")
-                            move_unit(Selected_Unit, pos)
+                            if move_unit(Selected_Unit, pos) then
+                                hide_unit_range()
+                                Selected_Unit = nil
+                            end
                         end
                     else
                         --print("move")
-                        move_unit(Selected_Unit, pos)
+                        if move_unit(Selected_Unit, pos) then
+                            hide_unit_range()
+                            Selected_Unit = nil
+                        end
                     end
                     hide_unit_range()
                     Selected_Unit = nil
